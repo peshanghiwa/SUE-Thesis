@@ -1,7 +1,11 @@
-<template></template>
+<template>
+  <div class="home-container">
+    <HomeHeading />
+  </div>
+</template>
 
 <script>
 export default {
-  name: "IndexPage",
+  name: "index-page",
 };
 </script>
