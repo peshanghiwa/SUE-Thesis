@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="103" height="103" viewBox="0 0 103 103">
+  <g id="account_balance_black_24dp" transform="translate(0 -0.436)">
+    <g id="Group_12" data-name="Group 12" transform="translate(0 0.436)">
+      <rect id="Rectangle_21" data-name="Rectangle 21" width="103" height="103" transform="translate(0)" fill="none"/>
+    </g>
+    <g id="Group_14" data-name="Group 14" transform="translate(8.24 4.383)">
+      <g id="Group_13" data-name="Group 13" transform="translate(0)">
+        <rect id="Rectangle_22" data-name="Rectangle 22" width="13" height="30" transform="translate(8.76 39.052)" fill="#393e46"/>
+        <rect id="Rectangle_23" data-name="Rectangle 23" width="12.92" height="30.146" transform="translate(36.98 38.76)" fill="#393e46"/>
+        <rect id="Rectangle_24" data-name="Rectangle 24" width="87" height="13" transform="translate(-0.24 78.052)" fill="#393e46"/>
+        <rect id="Rectangle_25" data-name="Rectangle 25" width="14" height="30" transform="translate(64.76 39.052)" fill="#393e46"/>
+        <path id="Path_25" data-name="Path 25" d="M45.066,1,2,22.533v8.613H88.133V22.533Z" transform="translate(-1.627 -1)" fill="#393e46"/>
+      </g>
+    </g>
+  </g>
+</svg>

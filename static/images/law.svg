@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100">
+  <g id="gavel_black_24dp" transform="translate(-0.099 -0.099)">
+    <g id="Group_6" data-name="Group 6" transform="translate(0.099 0.099)">
+      <rect id="Rectangle_15" data-name="Rectangle 15" width="100" height="100" transform="translate(0 0)" fill="none"/>
+    </g>
+    <g id="Group_8" data-name="Group 8" transform="translate(4.177 4.175)">
+      <g id="Group_7" data-name="Group 7">
+        <rect id="Rectangle_16" data-name="Rectangle 16" width="16.681" height="83.406" transform="translate(17.727 29.486) rotate(-44.968)" fill="#393e46"/>
+        <rect id="Rectangle_17" data-name="Rectangle 17" width="16.681" height="33.363" transform="matrix(0.707, -0.707, 0.707, 0.707, 35.393, 11.797)" fill="#393e46"/>
+        <rect id="Rectangle_18" data-name="Rectangle 18" width="16.681" height="33.363" transform="translate(0 47.192) rotate(-45)" fill="#393e46"/>
+        <rect id="Rectangle_19" data-name="Rectangle 19" width="50" height="8" transform="translate(-0.078 83.924)" fill="#393e46"/>
+      </g>
+    </g>
+  </g>
+</svg>

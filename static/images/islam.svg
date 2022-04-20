@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="124.956" height="120.15" viewBox="0 0 124.956 120.15">
+  <g id="Group_18" data-name="Group 18" transform="translate(-166.303 -1814.737)">
+    <g id="brightness_3_black_24dp" transform="translate(161.259 1838.786) rotate(-30)">
+      <path id="Path_30" data-name="Path 30" d="M21.4,0H0V121.055H21.4Z" transform="translate(22.086 0)" fill="none"/>
+      <path id="Path_31" data-name="Path 31" d="M50.44,0A49.975,49.975,0,0,1,65.572,2.32a50.444,50.444,0,0,0,0,96.239A50.441,50.441,0,1,1,50.44,0Z" transform="translate(0 10.088)" fill="#393e46"/>
+    </g>
+    <g id="star_rate_black_24dp" transform="translate(252.702 1829.704)">
+      <rect id="Rectangle_28" data-name="Rectangle 28" width="38.557" height="38.557" transform="translate(0 0)" fill="none"/>
+      <path id="Path_32" data-name="Path 32" d="M21.964,14.849,18.061,2l-3.9,12.849H2l9.926,7.083L8.152,34.123l9.91-7.533,9.926,7.533L24.213,21.932l9.91-7.083Z" transform="translate(1.212 1.222)" fill="#393e46"/>
+    </g>
+  </g>
+</svg>
