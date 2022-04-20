@@ -9,7 +9,7 @@
       </p>
       <div class="input-container">
         <div class="search-icon-container">
-          <img src="/images/search-icon.svg" height="30" width="30" alt="" />
+          <img src="/images/search-icon.svg" height="25" width="25" alt="" />
         </div>
         <input type="text" placeholder="search..." class="search-input" />
         <button class="search-button">Search</button>
@@ -60,6 +60,7 @@ export default {};
 .heading-image-container {
   position: relative;
   width: 100%;
+  transform: translateX(-20px);
 }
 
 .heading-image-container img {
@@ -109,7 +110,7 @@ export default {};
   width: calc(100% - 160px);
   height: 100%;
   border: none;
-  font-size: 20px;
+  font-size: 16px;
 }
 
 .search-input:focus {
@@ -122,7 +123,7 @@ export default {};
   height: 100%;
   background-color: #00adb5;
   color: white;
-  font-size: 18px;
+  font-size: 16px;
   cursor: pointer;
 }
 
