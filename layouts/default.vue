@@ -2,8 +2,7 @@
   <div>
     <Header />
     <Nuxt />
-
-    <footer></footer>
+    <Footer />
   </div>
 </template>
 <script>

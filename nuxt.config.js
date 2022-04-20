@@ -15,7 +15,7 @@ export default {
   css: ["~/assets/global.css"],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [],
+  plugins: [{ src: "~/plugins/vue-select" }],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
