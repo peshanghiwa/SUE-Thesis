@@ -1,35 +1,31 @@
 <template>
   <div class="degree-graduation-numbers-container">
     <div class="numbers-container">
-      <div class="degree-container">
-        <h2>bachelor</h2>
-        <p>238</p>
-      </div>
-      <div class="seperator-line"></div>
-      <div class="degree-container">
-        <h2>PhD</h2>
-        <p>45</p>
-      </div>
-      <div class="seperator-line"></div>
-      <div class="degree-container">
-        <h2>Master</h2>
-        <p>24</p>
-      </div>
-      <div class="seperator-line"></div>
-      <div class="degree-container">
-        <h2>Doctorate</h2>
-        <p>27</p>
-      </div>
-      <div class="seperator-line"></div>
-      <div class="degree-container">
-        <h2>All</h2>
-        <p>342</p>
+      <div
+        v-for="degree in degrees"
+        :key="degree.degree_id"
+        class="degree-container"
+        :class="{
+          'seperator-line-left': $store.getters.isRtl,
+          'seperator-line-right': !$store.getters.isRtl,
+        }"
+      >
+        <h2>{{ degree.degree_name }}</h2>
+        <p>{{ degree.count }}</p>
       </div>
     </div>
   </div>
 </template>
 <script>
-export default {};
+export default {
+  name: "DegreesGraduateNumbersComponent",
+  props: {
+    degrees: {
+      type: Array,
+      required: true,
+    },
+  },
+};
 </script>
 <style scoped>
 .degree-graduation-numbers-container {
@@ -47,6 +43,27 @@ export default {};
 .degree-container {
   text-align: center;
 }
+
+.seperator-line-right {
+  padding-right: 6%;
+  border-right: 1px solid rgba(255, 255, 255, 0.583);
+}
+
+.seperator-line-right:last-child {
+  border-right: none;
+  padding-right: 0px;
+}
+
+.seperator-line-left {
+  padding-left: 6%;
+  border-left: 1px solid rgba(255, 255, 255, 0.583);
+}
+
+.seperator-line-left:last-child {
+  border-left: none;
+  padding-left: 0px;
+}
+
 .degree-container h2 {
   text-transform: uppercase;
   font-size: 30px;
@@ -55,20 +72,12 @@ export default {};
   font-family: poppins-bold;
   font-size: 50px;
 }
-.seperator-line {
-  width: 1px;
-  height: 120px;
-  background-color: rgba(255, 255, 255, 0.583);
-}
 
 @media screen and (max-width: 1150px) {
   .numbers-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     row-gap: 50px;
-  }
-  .seperator-line {
-    display: none;
   }
 }
 
@@ -80,10 +89,24 @@ export default {};
     grid-template-columns: repeat(1, 1fr);
     row-gap: 20px;
   }
-  .seperator-line {
-    display: block;
-    width: 100%;
-    height: 1px;
+  .degree-container {
+    text-align: center;
+    padding-right: 0%;
+    border-right: none;
+  }
+  .degree-container:last-child {
+  }
+
+  .seperator-line-right,
+  .seperator-line-left {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.583);
+    padding-bottom: 5%;
+  }
+
+  .seperator-line-right:last-child,
+  .seperator-line-left:last-child {
+    border-bottom: none;
+    padding-bottom: 0%;
   }
 }
 </style>

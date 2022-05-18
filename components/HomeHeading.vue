@@ -11,8 +11,18 @@
         <div class="search-icon-container">
           <img src="/images/search-icon.svg" height="25" width="25" alt="" />
         </div>
-        <input type="text" placeholder="search..." class="search-input" />
-        <button class="search-button">Search</button>
+        <input
+          type="text"
+          v-model="search"
+          placeholder="search..."
+          class="search-input"
+        />
+        <button
+          @click="$router.push('/thesis?search=' + search)"
+          class="search-button"
+        >
+          Search
+        </button>
       </div>
     </article>
     <div class="heading-image-container">
@@ -25,7 +35,11 @@
   </section>
 </template>
 <script>
-export default {};
+export default {
+  data: () => ({
+    search: "",
+  }),
+};
 </script>
 <style scoped>
 .heading-container {

@@ -8,7 +8,10 @@
         is located in Erbil, capital of the autonomous Kurdistan Region of Iraq.
         Sulaimani University-Sulaimani was established in 1968.
       </p>
-      <button class="full-article-button">See Full Article</button>
+      <!-- <button >Visit</button> -->
+      <a class="full-article-button" href="https://su.edu.krd/" target="_blank"
+        >SUE Main Website</a
+      >
     </div>
     <div class="image-container">
       <img class="logo" src="/images/SUE-logo.png" alt="" />
@@ -37,13 +40,12 @@ h2 {
   border: none;
   background-color: #00adb5;
   font-size: 17px;
-  padding: 8px 20px;
+  padding: 10px 20px;
   margin-top: 20px;
   cursor: pointer;
   color: white;
   transition: 0.3s ease all;
   width: 160px;
-  height: 45px;
 }
 p {
   margin-block: 20px;

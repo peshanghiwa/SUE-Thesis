@@ -5,18 +5,38 @@
       <div class="input-container">
         <v-select
           placeholder="All Colleges"
-          :options="['Canada', 'United States']"
+          :options="collages"
+          label="name"
+          :reduce="(collage) => collage.collage_id"
+          v-model="selectedCollage"
         ></v-select>
       </div>
       <div class="input-container">
         <v-select
           placeholder="All Departments"
-          :options="['Canada', 'United States']"
+          :disabled="departments.length === 0"
+          :options="departments"
+          label="name"
+          :reduce="(department) => department.id"
+          v-model="selectedDepartment"
+        ></v-select>
+      </div>
+      <div class="input-container">
+        <v-select
+          placeholder="All Degrees"
+          :options="degrees"
+          label="name"
+          :reduce="(degree) => degree.id"
+          v-model="selectedDegree"
         ></v-select>
       </div>
       <div class="input3">
-        <input placeholder="Search" class="search-input" type="text" />
-        <!-- <button style="margin-inline-start: 10px" class="search-button"> -->
+        <input
+          placeholder="Search"
+          v-model="selectedSearch"
+          class="search-input"
+          type="text"
+        />
         <img
           src="/images/search-png.png"
           class="search-icon"
@@ -24,38 +44,153 @@
           width="20"
           alt=""
         />
-        <!-- </button> -->
       </div>
     </div>
     <div class="newses-container">
-      <div v-for="(i, index) in 12" :key="index" class="news-container">
+      <div
+        v-for="(thesis, index) in theses"
+        :key="index"
+        class="news-container"
+      >
+        <div class="degree-container">
+          {{ thesis.degree_name }}
+        </div>
         <div class="image-container">
           <img
             class="image"
-            src="https://i.blogs.es/f7aef1/lijmb2i7knggroafvumbuix3xq/840_560.jpeg"
+            :src="
+              thesis.image ||
+              'https://www.pngkey.com/png/detail/233-2332677_image-500580-placeholder-transparent.png'
+            "
             alt=""
           />
         </div>
         <div class="content-container">
           <h3 class="content-title">
-            Human Resources and issues behind the source of lorem ipsum dolor
-            sit enus pat sictumus, pens
+            {{ thesis.title }}
           </h3>
           <small class="author-container">
-            <strong class="author">Ahmad Muhamad</strong>
+            <strong class="author">{{ thesis.student_name }}</strong>
             <br />
-            College of Engineering,
+            College of {{ thesis.collage_name }},
             <br />
-            Software and Informatics Engineering
+            {{ thesis.department_name }}
           </small>
-          <button class="full-article-button">See Full Article</button>
+          <nuxt-link :to="`/thesis/${thesis.slug}`" class="full-article-button"
+            >See Full Article</nuxt-link
+          >
         </div>
       </div>
     </div>
+    <client-only>
+      <paginate
+        v-model="pagination.currentPage"
+        :page-count="pagination.totalPages"
+        :page-range="2"
+        :margin-pages="2"
+        :click-handler="clickCallback"
+        :prev-text="
+          !$store.getters.isRtl
+            ? `<img  src='/paginate-left.svg' height='14' width='14' />`
+            : `<img src='/paginate-right.svg' height='14' width='14' />`
+        "
+        :next-text="
+          $store.getters.isRtl
+            ? `<img  src='/paginate-left.svg' height='14' width='14' />`
+            : `<img src='/paginate-right.svg' height='14' width='14' />`
+        "
+        :container-class="'pagination'"
+        :page-class="'page-item'"
+        :active-class="`active-page`"
+        :prev-class="`prev-page`"
+        :next-class="`next-page`"
+      >
+      </paginate>
+    </client-only>
   </div>
 </template>
 <script>
-export default {};
+export default {
+  watchQuery: ["page", "search", "collage", "department", "degree"],
+  async asyncData({
+    isDev,
+    route,
+    store,
+    env,
+    params,
+    query,
+    req,
+    res,
+    redirect,
+    error,
+    $axios,
+  }) {
+    try {
+      const { page = 1, degree, search, department, collage } = query;
+      let url = `/api/theses/grid?page=${page - 1}&pageSize=20`;
+      if (degree) url += `&degree=${degree}`;
+      if (search) url += `&search=${search}`;
+      if (department) url += `&department=${department}`;
+      if (collage) url += `&collage=${collage}`;
+
+      const { data } = await $axios.get(url);
+
+      const response = await $axios.get("/api/home/thesesPage");
+      const degrees = response.data.degrees.map((degree) => ({
+        id: degree.id,
+        name: degree.name,
+      }));
+      const collages = response.data.collages;
+
+      return {
+        theses: data.data,
+        degrees,
+        collages,
+        pagination: {
+          currentPage: Number(page),
+          totalPages: data.pages,
+          pageSize: 20,
+          totalTheses: data.records,
+        },
+        selectedDegree: degree,
+        selectedCollage: collage,
+        selectedDepartment: department,
+        selectedSearch: search,
+      };
+    } catch (err) {
+      console.log(err);
+      error({ statusCode: 404, message: "Page not found" });
+    }
+  },
+  methods: {
+    async clickCallback(pageNumber) {
+      this.$router.push({
+        path: "/thesis",
+        query: { page: Number(pageNumber) },
+      });
+    },
+  },
+  computed: {
+    departments() {
+      if (this.selectedCollage) {
+        console.log(this.selectedCollage);
+        const collage = this.collages.find(
+          (collage) => collage.collage_id === this.selectedCollage
+        );
+
+        console.log(collage);
+        if (collage && collage.departments)
+          return collage.departments.map((department) => ({
+            id: department.id,
+            name: department.department_name,
+          }));
+
+        return [];
+      }
+      return [];
+    },
+  },
+};
 </script>
 <style scoped>
 .container {
@@ -67,8 +202,20 @@ export default {};
 }
 .inputs-container {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   column-gap: 20px;
+}
+@media screen and (max-width: 1000px) {
+  .inputs-container {
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 20px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .inputs-container {
+    grid-template-columns: 1fr;
+  }
 }
 .input-container {
   background-color: white;
@@ -115,11 +262,13 @@ export default {};
   grid-template-columns: repeat(3, 1fr);
   column-gap: 40px;
   margin-top: 40px;
+  row-gap: 40px;
 }
 .news-container {
   min-height: 450px;
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 .image-container {
   width: 100%;
@@ -132,6 +281,15 @@ export default {};
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+.degree-container {
+  background-color: #00adb5;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  color: white;
+  font-size: 14px;
+  padding: 4px 8px;
 }
 .content-container {
   width: calc(100% - 30px);
@@ -152,7 +310,7 @@ export default {};
   border: none;
   background-color: #00adb5;
   font-size: 14px;
-  padding: 8px 20px;
+  padding: 6px 16px;
   margin-top: 20px;
   cursor: pointer;
   color: white;

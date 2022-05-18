@@ -5,27 +5,47 @@
         <img class="logo" src="/images/SUE-logo.png" alt="" />
       </div>
       <ul class="navbar-items-container">
-        <li><nuxt-link class="navbar-items active" to="/">Home</nuxt-link></li>
         <li>
-          <nuxt-link class="navbar-items" to="/thesis?degree=bachelor"
-            >Bachelor</nuxt-link
+          <nuxt-link
+            class="navbar-items"
+            :class="{
+              active: navbar === 'index',
+            }"
+            to="/"
+            >Home</nuxt-link
           >
         </li>
-        <li>
-          <nuxt-link class="navbar-items" to="/thesis?degree=master"
+        <li v-for="(degree, index) in degrees" :key="index">
+          <nuxt-link
+            class="navbar-items"
+            :class="{
+              active:
+                navbar === 'thesis' && $route.query.degree === degree.name,
+            }"
+            :to="`/thesis?degree=${degree.name}`"
+            >{{ degree.name }}</nuxt-link
+          >
+        </li>
+        <!--  <li>
+          <nuxt-link
+            class="navbar-items"
+            to="/thesis?degree=master"
+            :class="{
+              active: navbar === 'thesis' && degree === 'master',
+            }"
             >Master</nuxt-link
           >
         </li>
         <li>
-          <nuxt-link class="navbar-items" to="/thesis?degree=phd"
-            >PhD</nuxt-link
-          >
-        </li>
-        <li>
-          <nuxt-link class="navbar-items" to="/thesis?degree=doctorate"
+          <nuxt-link
+            class="navbar-items"
+            to="/thesis?degree=doctorate"
+            :class="{
+              active: navbar === 'thesis' && degree === 'doctorate',
+            }"
             >Doctorate</nuxt-link
           >
-        </li>
+        </li> -->
       </ul>
 
       <img
@@ -68,16 +88,28 @@
         </div>
       </transition>
 
-      <div class="settings-container">setting</div>
+      <div class="settings-container">
+        <!-- <v-select
+          :options="['en', 'ku', 'ar']"
+          v-model="selectedLanguage"
+        ></v-select> -->
+        <select class="select-input" name="" id="">
+          <option value="en">En</option>
+          <option value="ku">Ku</option>
+          <option value="ar">Ar</option>
+        </select>
+      </div>
     </nav>
   </header>
 </template>
 <script>
 export default {
   name: "header-component",
+
   data() {
     return {
       showMobileNavbar: false,
+      selectedLanguage: "en",
     };
   },
   methods: {
@@ -85,11 +117,19 @@ export default {
       this.showMobileNavbar = !this.showMobileNavbar;
     },
   },
+  computed: {
+    navbar() {
+      return this.$route.name;
+    },
+    degrees() {
+      return this.$store.getters.getDegrees;
+    },
+  },
 };
 </script>
 <style scoped>
 /* Enter and leave animations can use different */
-/* durations and timing functions.              */
+/* durations and timing functions. */
 .slide-fade-enter-active,
 .slide-fade-leave-active {
   transition: all 0.5s ease;
@@ -118,6 +158,7 @@ export default {
 
 .navbar-items {
   color: #393e46;
+  text-transform: capitalize;
 }
 
 .navbar-items.active {
@@ -180,5 +221,13 @@ export default {
   .mobile-navbar-container {
     display: flex;
   }
+}
+
+.select-input {
+  background-color: #00adb5;
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
+  border: none;
 }
 </style>

@@ -3,25 +3,37 @@
     <h2 class="title">Latest Thesis Degrees</h2>
     <div class="line"></div>
     <div class="newses-container">
-      <div v-for="(i, index) in 3" :key="index" class="news-container">
+      <div
+        v-for="thesis in latestTheses"
+        :key="thesis.id"
+        class="news-container"
+      >
+        <small class="news-date">12-3-2022</small>
         <div class="image-container">
           <img
             class="image"
             src="https://enrollment.rochester.edu/blog/wp-content/uploads/2019/05/Math-Professor-UR.jpg"
             alt=""
           />
+          <!-- 
+            // ! Missing things:
+            // ! 1. Image
+            // ! 2. author name
+           -->
         </div>
         <div class="content-container">
           <h3 class="content-title">
-            Human Resources and issues behind the source of lorem ipsum dolor
-            sit enus pat sictumus, pens
+            {{ thesis.title }}
           </h3>
           <small class="author-container">
             <strong class="author">Ahmad Muhamad</strong>
             <br />
-            College of Engineering,
+            College of
+            <span class="capitalize"> {{ thesis.collage_name }}, </span>
             <br />
-            Software and Informatics Engineering
+            <span class="capitalize">
+              {{ thesis.department_name }}
+            </span>
           </small>
           <button class="full-article-button">See Full Article</button>
         </div>
@@ -33,7 +45,15 @@
   </div>
 </template>
 <script>
-export default {};
+export default {
+  name: "ThesisDegreeNewsComponent",
+  props: {
+    latestTheses: {
+      type: Array,
+      required: true,
+    },
+  },
+};
 </script>
 <style scoped>
 .container {
@@ -67,6 +87,17 @@ export default {};
   min-height: 450px;
   display: flex;
   flex-direction: column;
+  position: relative;
+}
+.news-date {
+  position: absolute;
+  background-color: #00adb5;
+  top: 10px;
+  padding: 4px 8px;
+  color: white;
+  font-size: 12px;
+
+  left: 10px;
 }
 .image-container {
   width: 100%;

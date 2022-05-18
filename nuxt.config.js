@@ -15,7 +15,11 @@ export default {
   css: ["~/assets/global.css"],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [{ src: "~/plugins/vue-select" }],
+  plugins: [
+    { src: "~/plugins/vue-select" },
+    { src: "~/plugins/axios" },
+    { src: "~/plugins/vue-paginate", ssr: false, mode: "client" },
+  ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -34,7 +38,7 @@ export default {
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
-    baseURL: "/",
+    baseURL: "http://localhost:3001",
   },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa

@@ -18,3 +18,61 @@ body {
 a {
   text-decoration: none;
 }
+.capitalize {
+  text-transform: capitalize;
+}
+
+.pagination {
+  margin: 70px 0 180px;
+  list-style-type: none;
+  display: flex;
+  justify-content: center;
+  column-gap: 20px;
+}
+.page-item {
+  min-height: 30px;
+  min-width: 30px;
+  cursor: pointer;
+  border: 1px solid #70707083;
+  color: black;
+  background-color: rgba(0, 0, 0, 0.052);
+  border-radius: 4px;
+}
+.page-item.active-page {
+  background-color: #00adb5;
+  color: white !important;
+}
+.page-item a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  font-size: 13px;
+}
+.page-item.active-page * {
+  color: white !important;
+}
+.prev-page a,
+.next-page a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  font-size: 16px;
+}
+.hover-effet,
+.hover-effet2,
+.hover-effet3 {
+  transition: all 0.3s ease !important;
+}
+.hover-effet:hover {
+  color: var(--primary-color) !important;
+}
+.hover-effet2:hover {
+  color: var(--secondary-color) !important;
+}
+.hover-effet3:hover {
+  color: var(--red-color) !important;
+}

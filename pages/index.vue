@@ -1,9 +1,9 @@
 <template>
   <div class="home-container">
     <HomeHeading />
-    <DegreesGraduateNumbers />
+    <DegreesGraduateNumbers :degrees="degrees" />
     <Collages />
-    <ThesisDegreeNews />
+    <ThesisDegreeNews :latestTheses="latestTheses" />
     <Seperator />
     <AboutSalahaddin />
   </div>
@@ -12,5 +12,15 @@
 <script>
 export default {
   name: "index-page",
+  data: () => ({
+    degrees: [],
+    latestTheses: [],
+  }),
+  async fetch() {
+    const { data } = await this.$axios.get("/api/home");
+    const { degrees, latestTheses } = data;
+    this.degrees = degrees;
+    this.latestTheses = latestTheses;
+  },
 };
 </script>
