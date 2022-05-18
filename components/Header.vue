@@ -26,26 +26,6 @@
             >{{ degree.name }}</nuxt-link
           >
         </li>
-        <!--  <li>
-          <nuxt-link
-            class="navbar-items"
-            to="/thesis?degree=master"
-            :class="{
-              active: navbar === 'thesis' && degree === 'master',
-            }"
-            >Master</nuxt-link
-          >
-        </li>
-        <li>
-          <nuxt-link
-            class="navbar-items"
-            to="/thesis?degree=doctorate"
-            :class="{
-              active: navbar === 'thesis' && degree === 'doctorate',
-            }"
-            >Doctorate</nuxt-link
-          >
-        </li> -->
       </ul>
 
       <img
@@ -89,11 +69,13 @@
       </transition>
 
       <div class="settings-container">
-        <!-- <v-select
-          :options="['en', 'ku', 'ar']"
+        <select
           v-model="selectedLanguage"
-        ></v-select> -->
-        <select class="select-input" name="" id="">
+          @change="switchLanguage"
+          class="select-input"
+          name=""
+          id=""
+        >
           <option value="en">En</option>
           <option value="ku">Ku</option>
           <option value="ar">Ar</option>
@@ -115,6 +97,10 @@ export default {
   methods: {
     toggleMobileNavbar() {
       this.showMobileNavbar = !this.showMobileNavbar;
+    },
+    switchLanguage(e) {
+      console.log(this.selectedLanguage);
+      this.$router.push(this.switchLocalePath(this.selectedLanguage));
     },
   },
   computed: {

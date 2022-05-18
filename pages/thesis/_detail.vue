@@ -98,6 +98,72 @@ export default {
       return dateStr;
     },
   },
+
+  head() {
+    return {
+      title: "Theses",
+      link: [...this.$nuxtI18nHead({ addSeoAttributes: true }).link],
+      meta: [
+        ...this.$nuxtI18nHead({ addSeoAttributes: true }).meta,
+        {
+          hid: "description",
+          name: this.thesis.title,
+          content: this.thesis.description,
+        },
+        {
+          hid: "og:type",
+          name: "og:type",
+          content: "website",
+        },
+        {
+          hid: "og:title",
+          name: "og:title",
+          content: this.thesis.title,
+        },
+        {
+          hid: "og:description",
+          name: "og:description",
+          content: this.thesis.description,
+        },
+        {
+          hid: "og:image",
+          name: "og:image",
+          content: `${this.$config.logoUrl}`,
+        },
+        {
+          hid: "og:url",
+          name: "og:url",
+          content: `${this.$config.baseUrl}`,
+        },
+        // twitter meta tags
+        {
+          hid: "twitter:card",
+          name: "twitter:card",
+          content: "summary_large_image",
+        },
+        {
+          hid: "twitter:title",
+          name: "twitter:title",
+          content: this.thesis.title,
+        },
+        {
+          hid: "twitter:description",
+          name: "twitter:description",
+          content: this.thesis.description,
+        },
+        {
+          hid: "twitter:image",
+          name: "twitter:image",
+          content: `${this.$config.logoUrl}`,
+        },
+        {
+          hid: "twitter:url",
+          name: "twitter:url",
+          content: `${this.$config.baseUrl}`,
+        },
+      ],
+    };
+  },
 };
 </script>
 <style scoped>

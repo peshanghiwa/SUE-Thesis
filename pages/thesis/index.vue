@@ -190,6 +190,74 @@ export default {
       return [];
     },
   },
+  head() {
+    return {
+      title: "Theses",
+      link: [...this.$nuxtI18nHead({ addSeoAttributes: true }).link],
+      meta: [
+        ...this.$nuxtI18nHead({ addSeoAttributes: true }).meta,
+        {
+          hid: "description",
+          name: "Salahaddin University Theses Website",
+          content:
+            "Salahaddin University Theses page, Filter by degree, department, collage, search, and more",
+        },
+        {
+          hid: "og:type",
+          name: "og:type",
+          content: "website",
+        },
+        {
+          hid: "og:title",
+          name: "og:title",
+          content: "Salahaddin University Theses Website",
+        },
+        {
+          hid: "og:description",
+          name: "og:description",
+          content:
+            "Salahaddin University Theses page, Filter by degree, department, collage, search, and more",
+        },
+        {
+          hid: "og:image",
+          name: "og:image",
+          content: `${this.$config.logoUrl}`,
+        },
+        {
+          hid: "og:url",
+          name: "og:url",
+          content: `${this.$config.baseUrl}`,
+        },
+        // twitter meta tags
+        {
+          hid: "twitter:card",
+          name: "twitter:card",
+          content: "summary_large_image",
+        },
+        {
+          hid: "twitter:title",
+          name: "twitter:title",
+          content: "Salahaddin University Theses Website",
+        },
+        {
+          hid: "twitter:description",
+          name: "twitter:description",
+          content:
+            "Salahaddin University Theses page, Filter by degree, department, collage, search, and more",
+        },
+        {
+          hid: "twitter:image",
+          name: "twitter:image",
+          content: `${this.$config.logoUrl}`,
+        },
+        {
+          hid: "twitter:url",
+          name: "twitter:url",
+          content: `${this.$config.baseUrl}`,
+        },
+      ],
+    };
+  },
 };
 </script>
 <style scoped>
