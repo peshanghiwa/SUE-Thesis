@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <div :dir="$store.getters.isRtl ? 'rtl' : 'ltr'">
+    <!-- <button @click="test">test</button> -->
     <Header />
     <Nuxt />
     <Footer />
@@ -24,6 +25,21 @@ export default {
     console.log(data);
 
     store.commit("SET_DEGREES", data.data);
+  },
+  data() {
+    return {
+      change: false,
+    };
+  },
+  computed: {
+    dir() {
+      return this.$store.getters.isRtl;
+    },
+  },
+  watch: {
+    dir(newVal) {
+      console.log(newVal);
+    },
   },
 };
 </script>

@@ -22,7 +22,7 @@
               active:
                 navbar === 'thesis' && $route.query.degree === degree.name,
             }"
-            :to="`/thesis?degree=${degree.name}`"
+            :to="localePath(`/thesis?degree=${degree.name}`)"
             >{{ degree.name }}</nuxt-link
           >
         </li>
@@ -99,7 +99,9 @@ export default {
       this.showMobileNavbar = !this.showMobileNavbar;
     },
     switchLanguage(e) {
-      console.log(this.selectedLanguage);
+      if (this.selectedLanguage === "en")
+        this.$store.commit("CHNAGE_LANG", false);
+      else this.$store.commit("CHNAGE_LANG", true);
       this.$router.push(this.switchLocalePath(this.selectedLanguage));
     },
   },

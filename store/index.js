@@ -28,6 +28,7 @@ export const actions = {
 export const mutations = {
   CHNAGE_LANG(state, isRtl) {
     state.rtl = isRtl;
+    console.log(state.rtl);
   },
   SET_FILTERS(state, filters) {
     state.filters = filters;

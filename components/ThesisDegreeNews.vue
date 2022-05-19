@@ -15,11 +15,6 @@
             src="https://enrollment.rochester.edu/blog/wp-content/uploads/2019/05/Math-Professor-UR.jpg"
             alt=""
           />
-          <!-- 
-            // ! Missing things:
-            // ! 1. Image
-            // ! 2. author name
-           -->
         </div>
         <div class="content-container">
           <h3 class="content-title">
@@ -35,12 +30,18 @@
               {{ thesis.department_name }}
             </span>
           </small>
-          <button class="full-article-button">See Full Article</button>
+          <nuxt-link
+            :to="localePath(`/thesis/${thesis.slug}`)"
+            class="full-article-button"
+            >See Full Article</nuxt-link
+          >
         </div>
       </div>
     </div>
     <div class="full-width">
-      <button class="all-articles-button">See All Articles</button>
+      <nuxt-link :to="localePath(`/thesis`)" class="all-articles-button"
+        >See All Articles</nuxt-link
+      >
     </div>
   </div>
 </template>

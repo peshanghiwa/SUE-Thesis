@@ -76,7 +76,9 @@
             <br />
             {{ thesis.department_name }}
           </small>
-          <nuxt-link :to="`/thesis/${thesis.slug}`" class="full-article-button"
+          <nuxt-link
+            :to="localePath(`/thesis/${thesis.slug}`)"
+            class="full-article-button"
             >See Full Article</nuxt-link
           >
         </div>
