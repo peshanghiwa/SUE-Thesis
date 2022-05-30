@@ -11,7 +11,11 @@
         }"
       >
         <h2>{{ degree.degree_name }}</h2>
-        <p>{{ degree.count }}</p>
+        <p>
+          <strong>
+            {{ degree.count }}
+          </strong>
+        </p>
       </div>
     </div>
   </div>
@@ -30,6 +34,12 @@ export default {
 <style scoped>
 .degree-graduation-numbers-container {
   padding: 50px;
+}
+@media screen and (max-width: 1000px) {
+  .degree-graduation-numbers-container {
+    padding-top: 0;
+    margin-top: 0px;
+  }
 }
 .numbers-container {
   background-color: #00adb5;
@@ -59,6 +69,13 @@ export default {
   border-left: 1px solid rgba(255, 255, 255, 0.583);
 }
 
+@media screen and (max-width: 650px) {
+  .seperator-line-left {
+    border-left: none;
+    padding-left: 0px;
+  }
+}
+
 .seperator-line-left:last-child {
   border-left: none;
   padding-left: 0px;
@@ -69,7 +86,6 @@ export default {
   font-size: 30px;
 }
 .degree-container p {
-  font-family: poppins-bold;
   font-size: 50px;
 }
 
@@ -84,6 +100,7 @@ export default {
 @media screen and (max-width: 650px) {
   .degree-graduation-numbers-container {
     padding: 20px;
+    margin-top: 40px;
   }
   .numbers-container {
     grid-template-columns: repeat(1, 1fr);
@@ -94,7 +111,12 @@ export default {
     padding-right: 0%;
     border-right: none;
   }
-  .degree-container:last-child {
+  .degree-container h2 {
+    text-transform: uppercase;
+    font-size: 20px;
+  }
+  .degree-container p {
+    font-size: 35px;
   }
 
   .seperator-line-right,
