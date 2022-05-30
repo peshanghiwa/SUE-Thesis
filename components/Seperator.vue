@@ -18,6 +18,12 @@ export default {};
   align-items: center;
 }
 
+@media screen and (max-width: 650px) {
+  .seperator-container {
+    padding-block: 20px;
+  }
+}
+
 .line {
   width: 40%;
   height: 2px;

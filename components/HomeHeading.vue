@@ -2,10 +2,11 @@
   <section class="heading-container">
     <img src="/images/dots.svg" class="dots" alt="" />
     <article class="heading-content-container">
-      <h1>Salahaddin University Thesis</h1>
+      <h1>
+        <strong> {{ $t("home.title") }} </strong>
+      </h1>
       <p>
-        Official salahaddin university thesis website, here you can find all the
-        Bachelor, PhD, Master and Doctorate researches for
+        {{ $t("home.description") }}
       </p>
       <div class="input-container">
         <div class="search-icon-container">
@@ -14,14 +15,14 @@
         <input
           type="text"
           v-model="search"
-          placeholder="search..."
+          :placeholder="$t('home.searchWithDots')"
           class="search-input"
         />
         <button
           @click="$router.push('/thesis?search=' + search)"
           class="search-button"
         >
-          Search
+          {{ $t("home.search") }}
         </button>
       </div>
     </article>
@@ -46,7 +47,6 @@ export default {
   display: flex;
   gap: 150px;
   padding: 50px;
-  height: 350px;
   position: relative;
 }
 .dots {
@@ -56,6 +56,7 @@ export default {
   transform: translate(-50%, -50%);
   height: 300px;
   width: 300px;
+  z-index: -1;
   opacity: 0.5;
 }
 .heading-content-container {
@@ -64,7 +65,6 @@ export default {
 
 .heading-content-container h1 {
   font-size: 60px;
-  font-family: "Poppins-Bold";
 }
 
 .heading-content-container p {
@@ -74,6 +74,7 @@ export default {
 .heading-image-container {
   position: relative;
   width: 100%;
+  height: 350px;
   transform: translateX(-20px);
 }
 
