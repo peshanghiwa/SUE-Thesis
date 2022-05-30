@@ -22,7 +22,6 @@ export default {
     $axios,
   }) {
     const { data } = await $axios.get("/degrees/grid?pageSize=100");
-    console.log(data);
 
     store.commit("SET_DEGREES", data.data);
   },
@@ -34,11 +33,6 @@ export default {
   computed: {
     dir() {
       return this.$store.getters.isRtl;
-    },
-  },
-  watch: {
-    dir(newVal) {
-      console.log(newVal);
     },
   },
 };
