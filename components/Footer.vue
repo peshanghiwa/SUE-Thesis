@@ -1,6 +1,6 @@
 <template>
   <footer class="container">
-    @ 2021 Salahaddin University Thesis. All Rights Reserved.
+    {{ $t("home.footer") }}
   </footer>
 </template>
 <script>
