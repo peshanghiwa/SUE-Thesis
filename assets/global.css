@@ -3,8 +3,11 @@
   src: url(~assets/fonts/Poppins-Regular.ttf);
 }
 @font-face {
-  font-family: "poppins-bold";
-  src: url(~assets/fonts/Poppins-Bold.ttf);
+  font-family: "ir-dans";
+  src: url(~assets/fonts/ir_sans.ttf);
+}
+:root {
+  --default-font-family: "poppins-regular";
 }
 * {
   padding: 0;
@@ -12,7 +15,7 @@
 }
 body {
   background-color: #eeeeee;
-  font-family: "poppins-regular";
+  font-family: var(--default-font-family) !important;
   overflow-x: hidden;
 }
 a {
