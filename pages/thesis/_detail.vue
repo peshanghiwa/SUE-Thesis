@@ -4,10 +4,13 @@
       <h1>
         {{ thesis.title }}
       </h1>
-      <div class="date">{{ formatDate(thesis.created_at) }}</div>
+
+      <div class="date">
+        {{ thesis.student_name }} - {{ formatDate(thesis.created_at) }}
+      </div>
       <img
         :src="
-          thesis.image ||
+          `https://backend.ethesis.su.edu.krd/${thesis.image_url}` ||
           'https://images.unsplash.com/photo-1621640786029-220e9ff8dd09?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dW5pdmVyc2l0eSUyMGJ1aWxkaW5nfGVufDB8fDB8fA%3D%3D&w=1000&q=80'
         "
         class="image-content"
@@ -16,10 +19,24 @@
       <p class="paragraph">
         {{ thesis.description }}
       </p>
-      <!-- <button class="full-article-button">See Full Article</button> -->
+      <h2 class="contact-info">
+        <strong> {{ $t("thesisDetail.contactInfo") }} </strong>
+      </h2>
+
+      <p>
+        <strong> {{ $t("thesisDetail.name") }}: </strong>
+        {{ thesis.student_name }}
+        <br />
+        <strong> {{ $t("thesisDetail.phone") }}: </strong>
+        0750123123
+        <br />
+
+        <strong> {{ $t("thesisDetail.email") }}: </strong>
+        ali@gmail.com
+      </p>
     </div>
     <div class="side-view">
-      <h2 class="similar">Similar Researches</h2>
+      <h2 class="similar">{{ $t("thesisDetail.similarResearches") }}</h2>
       <div
         v-for="(relatedThesis, index) in thesis.relatedTheses"
         :key="index"
@@ -28,7 +45,7 @@
         <div class="side-view-header">
           <img
             :src="
-              relatedThesis.image ||
+              `https://backend.ethesis.su.edu.krd/${relatedThesis.image_url}` ||
               'https://images.unsplash.com/photo-1621640786029-220e9ff8dd09?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dW5pdmVyc2l0eSUyMGJ1aWxkaW5nfGVufDB8fDB8fA%3D%3D&w=1000&q=80'
             "
             class="side-image"
@@ -37,12 +54,14 @@
         </div>
         <div class="side-view-content">
           <h3 class="content-title">
-            {{ relatedThesis.title }}
+            <strong>
+              {{ trancate(relatedThesis.title) }}
+            </strong>
           </h3>
           <small class="author-container">
             <strong class="author">{{ relatedThesis.students_name }}</strong>
             <br />
-            College of {{ relatedThesis.collages_name }},
+            {{ $t("home.collageOf") }} {{ relatedThesis.collage_name }}
             <br />
             {{ relatedThesis.departments_name }}
           </small>
@@ -54,33 +73,27 @@
 </template>
 <script>
 export default {
-  async asyncData({
-    isDev,
-    route,
-    store,
-    env,
-    params,
-    query,
-    req,
-    res,
-    redirect,
-    error,
-    $axios,
-  }) {
+  async asyncData({ params, error, $axios }) {
     try {
       const slug = params.detail;
       const { data } = await $axios.get(`/api/theses/${slug}`);
-      console.log(data);
       return {
         thesis: data,
       };
     } catch (err) {
       console.log(err);
-      error({ statusCode: 404, message: "Page not found" });
+      error({ statusCode: 404, message: $t("home.notFound") });
     }
   },
-
   methods: {
+    trancate(str) {
+      const length = 200;
+      if (str.length > length) {
+        return str.substring(0, length - "...".length) + "...";
+      } else {
+        return str;
+      }
+    },
     formatDate(time) {
       const date = new Date(time);
       const dateStr =
@@ -98,10 +111,9 @@ export default {
       return dateStr;
     },
   },
-
   head() {
     return {
-      title: "Theses",
+      title: this.thesis.title,
       link: [...this.$nuxtI18nHead({ addSeoAttributes: true }).link],
       meta: [
         ...this.$nuxtI18nHead({ addSeoAttributes: true }).meta,
@@ -187,7 +199,6 @@ export default {
 }
 .content-title {
   font-size: 16px;
-  font-family: poppins-bold;
 }
 .side-view-content {
   height: 50%;
@@ -253,9 +264,13 @@ export default {
   height: auto;
   margin-top: 10px;
 }
+.contact-info {
+  margin-top: 40px;
+}
 
 .paragraph {
   margin-top: 20px;
+  text-align: justify;
 }
 
 @media screen and (max-width: 800px) {
