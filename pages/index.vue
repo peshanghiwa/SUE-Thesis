@@ -24,15 +24,14 @@ export default {
   },
   head() {
     return {
-      title: "Home",
+      title: this.$t("home.title"),
       link: [...this.$nuxtI18nHead({ addSeoAttributes: true }).link],
       meta: [
         ...this.$nuxtI18nHead({ addSeoAttributes: true }).meta,
         {
           hid: "description",
-          name: "Salahaddin University Theses Website",
-          content:
-            "A Hub for all the Salahaddin University Theses, where you can explore and find informations and scientific researches about any topics.",
+          name: this.$t("home.pageName"),
+          content: this.$t("home.description"),
         },
         {
           hid: "og:type",
@@ -42,13 +41,12 @@ export default {
         {
           hid: "og:title",
           name: "og:title",
-          content: "Salahaddin University Theses Website",
+          content: this.$t("home.title"),
         },
         {
           hid: "og:description",
           name: "og:description",
-          content:
-            "A Hub for all the Salahaddin University Theses, where you can explore and find informations and scientific researches about any topics.",
+          content: this.$t("home.description"),
         },
         {
           hid: "og:image",
@@ -69,13 +67,12 @@ export default {
         {
           hid: "twitter:title",
           name: "twitter:title",
-          content: "Salahaddin University Theses Website",
+          content: this.$t("home.pageName"),
         },
         {
           hid: "twitter:description",
           name: "twitter:description",
-          content:
-            "A Hub for all the Salahaddin University Theses, where you can explore and find informations and scientific researches about any topics.",
+          content: this.$t("home.description"),
         },
         {
           hid: "twitter:image",
@@ -92,3 +89,9 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.home-container {
+  overflow: hidden;
+}
+</style>
