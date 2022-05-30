@@ -1,85 +1,105 @@
 <template>
   <div class="collages-container">
-    <h2 class="title">Salahaddin University Colleges</h2>
+    <h2 class="title">
+      <strong> {{ $t("home.collagesTitle") }} </strong>
+    </h2>
     <div class="line"></div>
     <div class="colleges-container">
-      <div
+      <nuxt-link
+        :to="localePath('/thesis?collage=' + college.id)"
         v-for="(college, index) in colleges"
         :key="index"
         class="collage-container"
       >
         <img :src="college.logo" alt="" class="logo" />
         <h3 class="college-title">{{ college.title }}</h3>
-      </div>
+      </nuxt-link>
     </div>
   </div>
 </template>
 <script>
 export default {
-  data: () => ({
-    colleges: [
-      {
-        title: "College of Science",
-        logo: "images/science.svg",
-      },
-      {
-        title: "College of Engineering",
-        logo: "images/engineering.svg",
-      },
-      {
-        title: "College of Law",
-        logo: "images/law.svg",
-      },
-      {
-        title: "College of Agriculture",
-        logo: "images/agriculture.svg",
-      },
-      {
-        title: "College of Education",
-        logo: "images/education.svg",
-      },
-      {
-        title: "College of Arts",
-        logo: "images/art.svg",
-      },
-      {
-        title: "College of Languages",
-        logo: "images/languages.svg",
-      },
-      {
-        title: "College of Administration & Economics",
-        logo: "images/economy.svg",
-      },
-      {
-        title: "College of Basic Education",
-        logo: "images/education.svg",
-      },
-      {
-        title: "College of Physical Education",
-        logo: "images/sport.svg",
-      },
-      {
-        title: "College of Islamic Science",
-        logo: "images/sport.svg",
-      },
-      {
-        title: "College of Fine Arts",
-        logo: "images/art.svg",
-      },
-      {
-        title: "College of Education Shaqlawa",
-        logo: "images/education.svg",
-      },
-      {
-        title: "College of Education Makhmur",
-        logo: "images/education.svg",
-      },
-      {
-        title: "College of Political Science",
-        logo: "images/politic.svg",
-      },
-    ],
-  }),
+  data() {
+    return {
+      colleges: [
+        {
+          title: this.$t("home.collages.science"),
+          logo: "images/science.svg",
+          id: 7,
+        },
+        {
+          title: this.$t("home.collages.engineering"),
+          logo: "images/engineering.svg",
+          id: 1,
+        },
+        {
+          title: this.$t("home.collages.law"),
+          logo: "images/law.svg",
+          id: 10,
+        },
+        {
+          title: this.$t("home.collages.agriculture"),
+          logo: "images/agriculture.svg",
+          id: 3,
+        },
+        {
+          title: this.$t("home.collages.education"),
+          logo: "images/education.svg",
+          id: 2,
+        },
+        {
+          title: this.$t("home.collages.arts"),
+          logo: "images/art.svg",
+          id: 15,
+        },
+        {
+          title: this.$t("home.collages.languages"),
+          logo: "images/languages.svg",
+          id: 5,
+        },
+        {
+          title: this.$t("home.collages.administrationAndEconomics"),
+          logo: "images/economy.svg",
+          id: 9,
+        },
+        {
+          title: this.$t("home.collages.basicEducation"),
+          logo: "images/education.svg",
+          id: 11,
+        },
+        {
+          title: this.$t("home.collages.physicalEducation"),
+          logo: "images/sport.svg",
+          id: 4,
+        },
+        {
+          title: this.$t("home.collages.islamicScience"),
+          logo: "images/sport.svg",
+          id: 12,
+        },
+        {
+          title: this.$t("home.collages.fineArts"),
+          logo: "images/art.svg",
+          id: 8,
+        },
+        {
+          title: this.$t("home.collages.educationShaqlawa"),
+          logo: "images/education.svg",
+          id: 16,
+        },
+        {
+          title: this.$t("home.collages.educationMakhmur"),
+          logo: "images/education.svg",
+          id: 17,
+        },
+        {
+          title: this.$t("home.collages.politicalScience"),
+          logo: "images/politic.svg",
+          id: 13,
+        },
+      ],
+    };
+  },
 };
 </script>
 <style scoped>
@@ -87,9 +107,13 @@ export default {
   padding: 50px;
 }
 .title {
-  font-family: poppins-bold;
   font-size: 40px;
   text-align: center;
+}
+@media screen and (max-width: 650px) {
+  .title {
+    font-size: 30px;
+  }
 }
 .line {
   width: 30%;
@@ -117,6 +141,7 @@ export default {
   font-size: 18px;
   margin-top: 10px;
   padding-inline: 10px;
+  color: black;
 }
 
 @media screen and (max-width: 1150px) {
@@ -136,10 +161,15 @@ export default {
 }
 @media screen and (max-width: 650px) {
   .title {
-    font-size: 30px;
+    font-size: 25px;
   }
+
   .colleges-container {
     grid-template-columns: repeat(1, 1fr);
+  }
+  .collages-container {
+    padding: 30px;
+    margin-top: 50px;
   }
 }
 
