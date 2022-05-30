@@ -1,6 +1,8 @@
 <template>
   <div class="error-container">
-    <h1 class="statuscode">404</h1>
+    <h1 class="statuscode">
+      <strong> 404 </strong>
+    </h1>
 
     <div>Page Not Found</div>
   </div>
@@ -22,7 +24,6 @@ export default {
 .statuscode {
   font-size: 150px;
   color: #00adb5;
-  font-family: poppins-bold;
 }
 
 .error-container > div {
