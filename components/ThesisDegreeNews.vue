@@ -129,16 +129,17 @@ export default {
   padding: 4px 8px;
   color: white;
   font-size: 12px;
-
   left: 10px;
 }
 .image-container {
   width: 100%;
   height: 270px;
 }
-
 @media screen and (max-width: 650px) {
   .image-container {
+    height: 230px;
+  }
+  .image {
     height: 230px;
   }
 }
@@ -147,7 +148,7 @@ export default {
 }
 .image {
   width: 100%;
-  height: 100%;
+  height: 270px;
   object-fit: cover;
 }
 .content-container {

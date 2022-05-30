@@ -378,13 +378,16 @@ export default {
   .image-container {
     height: 230px;
   }
+  .image {
+    height: 230px;
+  }
 }
 .content-title {
   font-size: 17px;
 }
 .image {
   width: 100%;
-  height: 100%;
+  height: 270px;
   object-fit: cover;
 }
 .degree-container {
