@@ -1,6 +1,8 @@
 <template>
   <div class="container">
-    <h2 class="title">Latest Thesis Degrees</h2>
+    <h2 class="title">
+      <strong> {{ $t("home.thesisDegreeNewsTitle2") }} </strong>
+    </h2>
     <div class="line"></div>
     <div class="newses-container">
       <div
@@ -8,28 +10,33 @@
         :key="thesis.id"
         class="news-container"
       >
-        <small class="news-date">12-3-2022</small>
+        <small class="news-date">{{ formatDate(thesis.created_at) }}</small>
         <div class="image-container">
           <img
             class="image"
-            src="https://enrollment.rochester.edu/blog/wp-content/uploads/2019/05/Math-Professor-UR.jpg"
+            :src="
+              `https://backend.ethesis.su.edu.krd/${thesis.image_url}` ||
+              'https://www.pngkey.com/png/detail/233-2332677_image-500580-placeholder-transparent.png'
+            "
             alt=""
           />
         </div>
         <div class="content-container">
-          <h3 class="content-title">
-            {{ thesis.title }}
-          </h3>
-          <small class="author-container">
-            <strong class="author">Ahmad Muhamad</strong>
-            <br />
-            College of
-            <span class="capitalize"> {{ thesis.collage_name }}, </span>
-            <br />
-            <span class="capitalize">
-              {{ thesis.department_name }}
-            </span>
-          </small>
+          <div>
+            <h3 class="content-title">
+              {{ trancate(thesis.title) }}
+            </h3>
+            <small class="author-container">
+              <strong class="author">{{ thesis.student_name }}</strong>
+              <br />
+              {{ $t("home.collageOf") }}
+              <span class="capitalize"> {{ thesis.collage_name }}, </span>
+              <br />
+              <span class="capitalize">
+                {{ thesis.department_name }}
+              </span>
+            </small>
+          </div>
           <nuxt-link
             :to="localePath(`/thesis/${thesis.slug}`)"
             class="full-article-button"
@@ -39,9 +46,9 @@
       </div>
     </div>
     <div class="full-width">
-      <nuxt-link :to="localePath(`/thesis`)" class="all-articles-button"
-        >See All Articles</nuxt-link
-      >
+      <nuxt-link :to="localePath(`/thesis`)" class="all-articles-button">
+        {{ $t("home.fullArticle") }}
+      </nuxt-link>
     </div>
   </div>
 </template>
@@ -52,6 +59,33 @@ export default {
     latestTheses: {
       type: Array,
       required: true,
+    },
+  },
+  methods: {
+    trancate(str) {
+      const length = 200;
+      if (str.length > length) {
+        return str.substring(0, length - "...".length) + "...";
+      } else {
+        return str;
+      }
+    },
+
+    formatDate(time) {
+      const date = new Date(time);
+      const dateStr =
+        date.getFullYear() +
+        "/" +
+        ("00" + date.getDate()).slice(-2) +
+        "/" +
+        ("00" + (date.getMonth() + 1)).slice(-2) +
+        " - " +
+        ("00" + date.getHours()).slice(-2) +
+        ":" +
+        ("00" + date.getMinutes()).slice(-2) +
+        ":" +
+        ("00" + date.getSeconds()).slice(-2);
+      return dateStr;
     },
   },
 };
@@ -67,7 +101,6 @@ export default {
   align-items: center;
 }
 .title {
-  font-family: poppins-bold;
   font-size: 40px;
   text-align: center;
 }
@@ -85,7 +118,6 @@ export default {
   margin-top: 40px;
 }
 .news-container {
-  min-height: 450px;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -102,7 +134,13 @@ export default {
 }
 .image-container {
   width: 100%;
-  height: 50%;
+  height: 270px;
+}
+
+@media screen and (max-width: 650px) {
+  .image-container {
+    height: 230px;
+  }
 }
 .content-title {
   font-size: 17px;
@@ -113,11 +151,13 @@ export default {
   object-fit: cover;
 }
 .content-container {
-  width: calc(100% - 30px);
-  height: calc(50% - 30px);
+  height: 50%;
   background-color: white;
   padding: 15px;
   position: relative;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
 }
 .author-container {
   margin-top: 10px;
@@ -132,13 +172,11 @@ export default {
   background-color: #00adb5;
   font-size: 14px;
   padding: 8px 20px;
-  margin-top: 20px;
   cursor: pointer;
   color: white;
   transition: 0.3s ease all;
-  bottom: 20px;
-  left: 15px;
-  position: absolute;
+  max-width: 40% !important;
+  text-align: center;
 }
 
 .all-articles-button {
@@ -150,6 +188,7 @@ export default {
   cursor: pointer;
   color: white;
   transition: 0.3s ease all;
+
   margin-inline: auto;
 }
 
@@ -163,9 +202,6 @@ export default {
 }
 
 @media screen and (max-width: 1150px) {
-  .news-container {
-    min-height: 500px;
-  }
   .content-title {
     font-size: 15px;
   }
@@ -180,6 +216,9 @@ export default {
   .newses-container {
     grid-template-columns: repeat(1, 1fr);
     row-gap: 30px;
+  }
+  .title {
+    font-size: 30px;
   }
   .container {
     padding-block: 50px;
