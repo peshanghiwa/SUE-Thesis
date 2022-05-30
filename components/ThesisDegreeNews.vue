@@ -178,6 +178,7 @@ export default {
   transition: 0.3s ease all;
   max-width: 40% !important;
   text-align: center;
+  margin-top: 20px;
 }
 
 .all-articles-button {
