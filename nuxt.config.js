@@ -12,6 +12,11 @@ export default {
       { name: "format-detection", content: "telephone=no" },
     ],
     link: [
+      // {
+      //   rel: "icon",
+      //   type: "image/x-icon",
+      //   href: "https://su.edu.krd/sites/default/files/sue-logo-200px.png",
+      // },
       { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
       // ...i18nHead.link,
     ],
@@ -46,7 +51,7 @@ export default {
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
-    baseURL: "https://www.backend.ethesis.su.edu.krd",
+    baseURL: "https://backend.ethesis.su.edu.krd",
   },
   server: {
     port: 4500,
