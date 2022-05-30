@@ -1,17 +1,15 @@
 <template>
   <div class="container">
     <div class="content-container">
-      <h2>About Salahaddin University</h2>
+      <h2>
+        <strong> {{ $t("home.thesisDegreeNewsTitle") }} </strong>
+      </h2>
       <p>
-        Salahaddin University-Erbil is one of the public higher education
-        institution in the North of Iraq and especially in Kurdistan region. It
-        is located in Erbil, capital of the autonomous Kurdistan Region of Iraq.
-        Sulaimani University-Sulaimani was established in 1968.
+        {{ $t("home.thesisDetail") }}
       </p>
-      <!-- <button >Visit</button> -->
-      <a class="full-article-button" href="https://su.edu.krd/" target="_blank"
-        >SUE Main Website</a
-      >
+      <a class="full-article-button" href="https://su.edu.krd/" target="_blank">
+        {{ $t("home.mainWebsite") }}
+      </a>
     </div>
     <div class="image-container">
       <img class="logo" src="/images/SUE-logo.png" alt="" />
@@ -29,7 +27,6 @@ export default {};
 }
 h2 {
   font-size: 40px;
-  font-family: poppins-bold;
 }
 .content-container {
   width: 50%;
@@ -79,7 +76,6 @@ p {
 
   h2 {
     font-size: 25px;
-    font-family: poppins-bold;
   }
 }
 </style>
