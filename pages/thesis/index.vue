@@ -1,6 +1,8 @@
 <template>
   <div class="container">
-    <h1 class="page-title">Search & Filter</h1>
+    <h1 class="page-title">
+      <strong> {{ $t("thesis.title") }} </strong>
+    </h1>
     <div class="inputs-container">
       <div class="input-container">
         <v-select
@@ -13,9 +15,8 @@
       </div>
       <div class="input-container">
         <v-select
-          placeholder="All Departments"
-          :disabled="departments.length === 0"
-          :options="departments"
+          :placeholder="$t('thesis.allDepartments')"
+          :options="backupDepartments || departments"
           label="name"
           :reduce="(department) => department.id"
           v-model="selectedDepartment"
@@ -23,7 +24,7 @@
       </div>
       <div class="input-container">
         <v-select
-          placeholder="All Degrees"
+          :placeholder="$t('thesis.allDegreesPlaceholder')"
           :options="degrees"
           label="name"
           :reduce="(degree) => degree.id"
@@ -32,18 +33,20 @@
       </div>
       <div class="input3">
         <input
-          placeholder="Search"
+          :placeholder="$t('thesis.searchPlaceholder')"
           v-model="selectedSearch"
           class="search-input"
           type="text"
         />
-        <img
-          src="/images/search-png.png"
-          class="search-icon"
-          height="20"
-          width="20"
-          alt=""
-        />
+        <button class="search-button" @click="onSearchHandle">
+          <img
+            src="/images/search-png.png"
+            class="search-icon"
+            height="20"
+            width="20"
+            alt=""
+          />
+        </button>
       </div>
     </div>
     <div class="newses-container">
@@ -59,27 +62,29 @@
           <img
             class="image"
             :src="
-              thesis.image ||
+              `https://backend.ethesis.su.edu.krd/${thesis.image_url}` ||
               'https://www.pngkey.com/png/detail/233-2332677_image-500580-placeholder-transparent.png'
             "
             alt=""
           />
         </div>
         <div class="content-container">
-          <h3 class="content-title">
-            {{ thesis.title }}
-          </h3>
-          <small class="author-container">
-            <strong class="author">{{ thesis.student_name }}</strong>
-            <br />
-            College of {{ thesis.collage_name }},
-            <br />
-            {{ thesis.department_name }}
-          </small>
+          <div>
+            <h3 class="content-title">
+              {{ trancate(thesis.title) }}
+            </h3>
+            <small class="author-container">
+              <strong class="author">{{ thesis.student_name }}</strong>
+              <br />
+              {{ $t("home.collageOf") }} {{ thesis.collage_name }},
+              <br />
+              {{ thesis.department_name }}
+            </small>
+          </div>
           <nuxt-link
             :to="localePath(`/thesis/${thesis.slug}`)"
             class="full-article-button"
-            >See Full Article</nuxt-link
+            >{{ $t("home.seeFullArticle") }}</nuxt-link
           >
         </div>
       </div>
@@ -114,19 +119,7 @@
 <script>
 export default {
   watchQuery: ["page", "search", "collage", "department", "degree"],
-  async asyncData({
-    isDev,
-    route,
-    store,
-    env,
-    params,
-    query,
-    req,
-    res,
-    redirect,
-    error,
-    $axios,
-  }) {
+  async asyncData({ query, error, $axios }) {
     try {
       const { page = 1, degree, search, department, collage } = query;
       let url = `/api/theses/grid?page=${page - 1}&pageSize=20`;
@@ -144,6 +137,25 @@ export default {
       }));
       const collages = response.data.collages;
 
+      const selectedCollage = collages.find(
+        (item) => item.collage_id === Number(collage)
+      );
+
+      const backupDepartments = selectedCollage
+        ? selectedCollage.departments.map((department) => ({
+            id: department.id,
+            name: department.department_name,
+          }))
+        : [];
+
+      let selectedDepartment = "";
+      if (collage && department) {
+        selectedDepartment =
+          collages
+            .find((item) => item.collage_id === Number(collage))
+            .departments?.find((item) => item.id === Number(department))
+            ?.department_name ?? "";
+      }
       return {
         theses: data.data,
         degrees,
@@ -154,14 +166,20 @@ export default {
           pageSize: 20,
           totalTheses: data.records,
         },
-        selectedDegree: degree,
-        selectedCollage: collage,
-        selectedDepartment: department,
+        selectedDegree: degrees.find((item) => item.id === Number(degree)),
+        selectedCollage: selectedCollage
+          ? {
+              id: selectedCollage.collage_id,
+              name: selectedCollage.name,
+            }
+          : [],
+        backupDepartments,
+        selectedDepartment,
         selectedSearch: search,
       };
     } catch (err) {
       console.log(err);
-      error({ statusCode: 404, message: "Page not found" });
+      error({ statusCode: 404, message: $t("home.notFound") });
     }
   },
   methods: {
@@ -171,16 +189,34 @@ export default {
         query: { page: Number(pageNumber) },
       });
     },
+    trancate(str) {
+      const length = 200;
+      if (str.length > length) {
+        return str.substring(0, length - "...".length) + "...";
+      } else {
+        return str;
+      }
+    },
+    onSearchHandle() {
+      const query = {};
+      if (this.selectedCollage) query.collage = this.selectedCollage;
+      if (this.selectedDepartment) query.department = this.selectedDepartment;
+      if (this.selectedDegree) query.degree = this.selectedDegree;
+      if (this.selectedSearch) query.search = this.selectedSearch;
+
+      console.log(query);
+      this.$router.push({
+        path: "/thesis",
+        query,
+      });
+    },
   },
   computed: {
     departments() {
       if (this.selectedCollage) {
-        console.log(this.selectedCollage);
         const collage = this.collages.find(
           (collage) => collage.collage_id === this.selectedCollage
         );
-
-        console.log(collage);
         if (collage && collage.departments)
           return collage.departments.map((department) => ({
             id: department.id,
@@ -200,9 +236,8 @@ export default {
         ...this.$nuxtI18nHead({ addSeoAttributes: true }).meta,
         {
           hid: "description",
-          name: "Salahaddin University Theses Website",
-          content:
-            "Salahaddin University Theses page, Filter by degree, department, collage, search, and more",
+          name: this.$t("thesis.pageName"),
+          content: this.$t("thesis.pageDescription"),
         },
         {
           hid: "og:type",
@@ -212,13 +247,12 @@ export default {
         {
           hid: "og:title",
           name: "og:title",
-          content: "Salahaddin University Theses Website",
+          content: this.$t("thesis.pageName"),
         },
         {
           hid: "og:description",
           name: "og:description",
-          content:
-            "Salahaddin University Theses page, Filter by degree, department, collage, search, and more",
+          content: this.$t("thesis.pageDescription"),
         },
         {
           hid: "og:image",
@@ -239,13 +273,12 @@ export default {
         {
           hid: "twitter:title",
           name: "twitter:title",
-          content: "Salahaddin University Theses Website",
+          content: this.$t("thesis.pageName"),
         },
         {
           hid: "twitter:description",
           name: "twitter:description",
-          content:
-            "Salahaddin University Theses page, Filter by degree, department, collage, search, and more",
+          content: this.$t("thesis.pageDescription"),
         },
         {
           hid: "twitter:image",
@@ -268,7 +301,6 @@ export default {
 }
 .page-title {
   font-size: 40px;
-  font-family: poppins-bold;
 }
 .inputs-container {
   display: grid;
@@ -313,10 +345,9 @@ export default {
 .search-button {
   width: 40px;
   margin-inline-start: 10px !important;
-  height: 95%;
+  height: 20px;
   border: none;
   border-radius: 4px;
-  background-color: #00adb5;
   cursor: pointer;
 }
 .search-icon {
@@ -335,14 +366,18 @@ export default {
   row-gap: 40px;
 }
 .news-container {
-  min-height: 450px;
   display: flex;
   flex-direction: column;
   position: relative;
 }
 .image-container {
   width: 100%;
-  height: 50%;
+  height: 270px;
+}
+@media screen and (max-width: 650px) {
+  .image-container {
+    height: 230px;
+  }
 }
 .content-title {
   font-size: 17px;
@@ -362,11 +397,13 @@ export default {
   padding: 4px 8px;
 }
 .content-container {
-  width: calc(100% - 30px);
-  height: calc(50% - 30px);
+  height: 50%;
   background-color: white;
   padding: 15px;
   position: relative;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
 }
 .author-container {
   margin-top: 10px;
@@ -380,14 +417,13 @@ export default {
   border: none;
   background-color: #00adb5;
   font-size: 14px;
-  padding: 6px 16px;
+  padding: 5px 20px;
   margin-top: 20px;
   cursor: pointer;
   color: white;
   transition: 0.3s ease all;
-  bottom: 20px;
-  left: 15px;
-  position: absolute;
+  max-width: 40% !important;
+  text-align: center;
 }
 
 .all-articles-button {
