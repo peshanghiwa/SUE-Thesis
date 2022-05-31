@@ -43,6 +43,7 @@ h2 {
   color: white;
   transition: 0.3s ease all;
   width: 160px;
+  text-align: center;
 }
 p {
   margin-block: 20px;
