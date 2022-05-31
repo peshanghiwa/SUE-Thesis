@@ -29,7 +29,6 @@
             <small class="author-container">
               <strong class="author">{{ thesis.student_name }}</strong>
               <br />
-              {{ $t("home.collageOf") }}
               <span class="capitalize"> {{ thesis.collage_name }}, </span>
               <br />
               <span class="capitalize">
