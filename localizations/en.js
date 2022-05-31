@@ -1,12 +1,14 @@
 export default async (context, locale) => {
   return await Promise.resolve({
     home: {
-      title: "Salahaddin University Thesis",
+      title: "Salahaddin University Theses",
       description:
         "Official salahaddin university thesis website, here you can find all the official Bachelor, PhD, and Masters research papers of the graduated students.",
       search: "Search",
       searchWithDots: "Search...",
+      home: "Home",
       collagesTitle: "Salahaddin University Colleges",
+      bachelor: "Bachelor",
       collages: {
         science: "College of Science",
         engineering: "College of Engineering",
@@ -46,6 +48,7 @@ export default async (context, locale) => {
       pageName: "Salahaddin University Theses Website",
       pageDescription:
         "Salahaddin University Theses page, Filter by degree, department, collage, search, and more",
+      noResults: "No Thesis Found",
     },
     thesisDetail: {
       contactInfo: "Student Contact Info",
