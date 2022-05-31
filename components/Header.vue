@@ -17,7 +17,7 @@
               active: navbar === 'index',
             }"
             to="/"
-            >Home</nuxt-link
+            >{{ $t("home.home") }}</nuxt-link
           >
         </li>
         <li v-for="(degree, index) in degrees" :key="index">
@@ -45,7 +45,9 @@
           <div @click="toggleMobileNavbar" class="navbar-space"></div>
           <ul class="mobile-navbar-items-container">
             <li>
-              <nuxt-link class="mobile-navbar-items" to="/">Home</nuxt-link>
+              <nuxt-link class="mobile-navbar-items" to="/">{{
+                $t("home.home")
+              }}</nuxt-link>
             </li>
             <li v-for="(degree, index) in degrees" :key="index">
               <nuxt-link
