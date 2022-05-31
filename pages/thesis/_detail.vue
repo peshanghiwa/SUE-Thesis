@@ -74,7 +74,7 @@
 </template>
 <script>
 export default {
-  async asyncData({ params, error, $axios }) {
+  async asyncData({ params, error, $axios, $t }) {
     try {
       const slug = params.detail;
       const { data } = await $axios.get(`/api/theses/${slug}`);
@@ -83,7 +83,7 @@ export default {
       };
     } catch (err) {
       console.log(err);
-      error({ statusCode: 404, message: $t("home.notFound") });
+      error({ statusCode: 404, message: "Page Not Found" });
     }
   },
   methods: {

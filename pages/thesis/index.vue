@@ -123,7 +123,7 @@
 <script>
 export default {
   watchQuery: ["page", "search", "collage", "department", "degree"],
-  async asyncData({ query, error, $axios }) {
+  async asyncData({ query, error, $axios, $t }) {
     try {
       const { page = 1, degree, search, department, collage } = query;
       let url = `/api/theses/grid?page=${page - 1}&pageSize=20`;
@@ -183,7 +183,7 @@ export default {
       };
     } catch (err) {
       console.log(err);
-      error({ statusCode: 404, message: $t("home.notFound") });
+      error({ statusCode: 404, message: "Page Not Found" });
     }
   },
   methods: {
