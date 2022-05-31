@@ -6,7 +6,7 @@
       </h1>
 
       <div class="date">
-        {{ thesis.student_name }} - {{ formatDate(thesis.created_at) }}
+        {{ thesis.student_name }} - {{ formatDate(thesis.theises_date) }}
       </div>
       <img
         :src="
@@ -37,8 +37,9 @@
     </div>
     <div class="side-view">
       <h2 class="similar">{{ $t("thesisDetail.similarResearches") }}</h2>
-      <div
+      <nuxt-link
         v-for="(relatedThesis, index) in thesis.relatedTheses"
+        :to="`/thesis/${relatedThesis.slug}`"
         :key="index"
         class="news-container"
       >
@@ -61,13 +62,13 @@
           <small class="author-container">
             <strong class="author">{{ relatedThesis.students_name }}</strong>
             <br />
-            {{ $t("home.collageOf") }} {{ relatedThesis.collage_name }}
+            {{ relatedThesis.collage_name }}
             <br />
             {{ relatedThesis.departments_name }}
           </small>
           <br />
         </div>
-      </div>
+      </nuxt-link>
     </div>
   </div>
 </template>
@@ -225,6 +226,8 @@ export default {
   height: 400px;
   cursor: pointer;
   margin-bottom: 50px;
+  display: block;
+  color: black;
 }
 
 @media screen and (max-width: 1200px) {

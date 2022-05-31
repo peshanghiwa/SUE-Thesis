@@ -76,7 +76,7 @@
             <small class="author-container">
               <strong class="author">{{ thesis.student_name }}</strong>
               <br />
-              {{ $t("home.collageOf") }} {{ thesis.collage_name }},
+              {{ thesis.collage_name }},
               <br />
               {{ thesis.department_name }}
             </small>
@@ -88,6 +88,10 @@
           >
         </div>
       </div>
+      <div v-if="theses.length === 0"></div>
+      <h3 v-if="theses.length === 0" class="no-results">
+        {{ $t("thesis.noResults") }}
+      </h3>
     </div>
     <client-only>
       <paginate
@@ -203,8 +207,6 @@ export default {
       if (this.selectedDepartment) query.department = this.selectedDepartment;
       if (this.selectedDegree) query.degree = this.selectedDegree;
       if (this.selectedSearch) query.search = this.selectedSearch;
-
-      console.log(query);
       this.$router.push({
         path: "/thesis",
         query,
@@ -298,6 +300,7 @@ export default {
 <style scoped>
 .container {
   padding: 50px;
+  min-height: 550px;
 }
 .page-title {
   font-size: 40px;
@@ -337,7 +340,13 @@ export default {
   background-color: none;
   font-size: 15px;
 }
-
+.no-results {
+  text-align: center;
+  margin-inline: auto;
+  font-size: 40px;
+  margin-bottom: 100px;
+  opacity: 0.3;
+}
 .search-input::placeholder {
   color: black;
   font-size: 15px;
