@@ -188,8 +188,9 @@ export default {
   },
   methods: {
     async clickCallback(pageNumber) {
+      const currentLocale = this.$i18n.locale === "en" ? "" : this.$i18n.locale;
       this.$router.push({
-        path: "/thesis",
+        path: `/${currentLocale}/thesis`,
         query: { page: Number(pageNumber) },
       });
     },
@@ -207,8 +208,9 @@ export default {
       if (this.selectedDepartment) query.department = this.selectedDepartment;
       if (this.selectedDegree) query.degree = this.selectedDegree;
       if (this.selectedSearch) query.search = this.selectedSearch;
+      const currentLocale = this.$i18n.locale === "en" ? "" : this.$i18n.locale;
       this.$router.push({
-        path: "/thesis",
+        path: `/${currentLocale}/thesis`,
         query,
       });
     },
