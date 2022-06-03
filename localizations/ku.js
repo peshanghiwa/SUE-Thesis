@@ -29,7 +29,7 @@ export default async (context, locale) => {
       thesisDegreeNewsTitle: "نوێترین توێژینەوەکان",
       collageOf: "كۆلێژی",
       fullArticle: "سەیری هەموو بابەتەکان بکە",
-      seeFullArticle: "سەیری تەواوی بابەتەکە بکە",
+      seeFullArticle: "درێژەی بابەت",
       latestNews: "نوێترین هه‌واڵ",
       thesisDegreeNewsTitle2: "دەربارەی زانکۆی سەڵاحەدین",
       thesisDetail:
@@ -44,6 +44,7 @@ export default async (context, locale) => {
       searchPlaceholder: "گەڕان...",
       allDegreesPlaceholder: "هەموو پلەکان",
       allDepartments: "سەرجەم بەشەکان",
+      allCollages: "سەرجەم کۆلێژەکان",
       pageTitle: "توێژینەوەکان",
       pageName: "ماڵپەڕی تێزەکانی زانکۆی سەڵاحەدین",
       pageDescription:

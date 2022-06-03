@@ -45,6 +45,7 @@ export default async (context, locale) => {
       allDegreesPlaceholder: "كل الدرجات",
       allDepartments: "جميع الإدارات",
       pageTitle: "أطروحات",
+      allCollages: "جميع الكليات",
       pageName: "موقع جامعة صلاح الدين للرسائل الجامعية",
       pageDescription:
         "صفحة رسائل جامعة صلاح الدين ، تصفية حسب الدرجة ، القسم ، الكلية ، البحث ، والمزيد",

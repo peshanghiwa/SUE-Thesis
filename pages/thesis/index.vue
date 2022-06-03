@@ -6,7 +6,7 @@
     <div class="inputs-container">
       <div class="input-container">
         <v-select
-          placeholder="All Colleges"
+          :placeholder="$t('thesis.allCollages')"
           :options="collages"
           label="name"
           :reduce="(collage) => collage.collage_id"

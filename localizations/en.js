@@ -44,6 +44,7 @@ export default async (context, locale) => {
       searchPlaceholder: "Search...",
       allDegreesPlaceholder: "All Degrees",
       allDepartments: "All Departments",
+      allCollages: "All Collages",
       pageTitle: "Theses",
       pageName: "Salahaddin University Theses Website",
       pageDescription:
