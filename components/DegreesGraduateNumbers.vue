@@ -30,28 +30,28 @@ export default {
     },
   },
 
-  watch: {
-    degrees: function () {
-      if (!this.degrees.find((degree) => degree.degree_id === 4)) {
-        this.degrees.unshift({
-          degree_id: 4,
-          degree_name: this.$t("home.bachelor"),
-          count: 0,
-        });
-      }
-    },
-  },
+  // watch: {
+  //   degrees: function () {
+  //     if (!this.degrees.find((degree) => degree.degree_id === 4)) {
+  //       this.degrees.unshift({
+  //         degree_id: 4,
+  //         degree_name: this.$t("home.bachelor"),
+  //         count: 0,
+  //       });
+  //     }
+  //   },
+  // },
 
-  mounted() {
-    // if this.degrees doesn't containt degrees_id 4, then add it
-    if (!this.degrees.find((degree) => degree.degree_id === 4)) {
-      this.degrees.unshift({
-        degree_id: 4,
-        degree_name: this.$t("home.bachelor"),
-        count: 0,
-      });
-    }
-  },
+  // mounted() {
+  //   // if this.degrees doesn't containt degrees_id 4, then add it
+  //   if (!this.degrees.find((degree) => degree.degree_id === 4)) {
+  //     this.degrees.unshift({
+  //       degree_id: 4,
+  //       degree_name: this.$t("home.bachelor"),
+  //       count: 0,
+  //     });
+  //   }
+  // },
 };
 </script>
 <style scoped>
