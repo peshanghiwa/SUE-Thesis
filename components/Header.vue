@@ -27,8 +27,8 @@
               active:
                 navbar === 'thesis' && $route.query.degree === degree.name,
             }"
-            :to="localePath(`/thesis?degree=${degree.name}`)"
-            >{{ degree.name }}</nuxt-link
+            :to="localePath(`/thesis?degree=${degree.id}`)"
+            >{{ degree[`name_${$i18n.locale}`] }}</nuxt-link
           >
         </li>
       </ul>
@@ -53,7 +53,7 @@
               <nuxt-link
                 @click="showMobileNavbar = false"
                 class="mobile-navbar-items"
-                :to="localePath(`/thesis?degree=${degree.name}`)"
+                :to="localePath(`/thesis?degree=${degree.id}`)"
                 >{{ degree.name }}</nuxt-link
               >
             </li>
@@ -108,7 +108,7 @@ export default {
     toggleMobileNavbar() {
       this.showMobileNavbar = !this.showMobileNavbar;
     },
-    switchLanguage(e) {
+    async switchLanguage(e) {
       if (this.selectedLanguage === "en") {
         this.$store.commit("CHNAGE_LANG", false);
         this.setFontFamily(false);
@@ -116,7 +116,8 @@ export default {
         this.$store.commit("CHNAGE_LANG", true);
         this.setFontFamily(true);
       }
-      this.$router.push(this.switchLocalePath(this.selectedLanguage));
+      this.$i18n.setLocale(this.selectedLanguage);
+      await this.$store.dispatch("getDegrees");
     },
 
     setFontFamily(isRtl) {
