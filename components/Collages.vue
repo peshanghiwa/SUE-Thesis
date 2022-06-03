@@ -137,7 +137,6 @@ export default {
   transition: all 0.3s ease;
 }
 .college-title {
-  font-family: poppins-regular;
   font-size: 18px;
   margin-top: 10px;
   padding-inline: 10px;

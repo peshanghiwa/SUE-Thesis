@@ -3,7 +3,7 @@
   src: url(~assets/fonts/Poppins-Regular.ttf);
 }
 @font-face {
-  font-family: "ir-dans";
+  font-family: "ir-sans";
   src: url(~assets/fonts/ir_sans.ttf);
 }
 :root {

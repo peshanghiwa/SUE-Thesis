@@ -127,7 +127,7 @@ export default {
           "poppins-regular"
         );
       } else {
-        rootCssVariables.style.setProperty("--default-font-family", "ir-dans");
+        rootCssVariables.style.setProperty("--default-font-family", "ir-sans");
       }
     },
   },
