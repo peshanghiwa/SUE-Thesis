@@ -10,6 +10,7 @@ export default {
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { hid: "description", name: "description", content: "" },
       { name: "format-detection", content: "telephone=no" },
+      { name: "theme-color", content: "#00adb5" },
     ],
     link: [
       // {
@@ -46,6 +47,28 @@ export default {
     "@nuxtjs/i18n",
     "@nuxtjs/sitemap",
     "@nuxtjs/pwa",
+    [
+      "nuxt-twa-module",
+      {
+        /* module options */
+        defaultUrl: "https://ethesis.su.edu.krd/",
+        hostName: "ethesis.su.edu.krd",
+        applicationId: "com.suethesis.example",
+        launcherName: "SUE Theses",
+        versionCode: 1,
+        versionName: "1.0",
+        statusBarColor: "#00adb5",
+        // The sha256Fingerprints by is an array with one SHA-256 key string.
+        // But if you have multiple you can add them to the array. More information about the website asociation:
+        // https://developer.android.com/training/app-links/verify-site-associations#web-assoc
+        sha256Fingerprints: ["/* your SHA-256 keys */"],
+        /* optional */
+        /* overwrite default location for icon */
+        iconPath: "/static/icon.png",
+        /* Overwrite folder where to put .wellknown */
+        distFolder: ".nuxt/dist/client",
+      },
+    ],
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -95,7 +118,19 @@ export default {
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
     manifest: {
+      name: "SUE Theses",
       lang: "en",
+      description:
+        "Official salahaddin university thesis website, here you can find all the official Bachelor, PhD, and Masters research papers of the graduated students.",
+      theme_color: "#00adb5",
+      background_color: "#FFFFFF",
+      icons: [
+        {
+          src: "/logo.png",
+          sizes: "192x192",
+          type: "image/png",
+        },
+      ],
     },
   },
 
