@@ -1,6 +1,5 @@
 <template>
   <div :dir="$store.getters.isRtl ? 'rtl' : 'ltr'">
-    <!-- <button @click="test">test</button> -->
     <Header />
     <Nuxt />
     <Footer />
