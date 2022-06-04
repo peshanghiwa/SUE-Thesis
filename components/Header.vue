@@ -16,7 +16,7 @@
             :class="{
               active: navbar === 'index',
             }"
-            to="/"
+            :to="localePath('/')"
             >{{ $t("home.home") }}</nuxt-link
           >
         </li>
@@ -45,7 +45,7 @@
           <div @click="toggleMobileNavbar" class="navbar-space"></div>
           <ul class="mobile-navbar-items-container">
             <li>
-              <nuxt-link class="mobile-navbar-items" to="/">{{
+              <nuxt-link class="mobile-navbar-items" :to="localePath('/')">{{
                 $t("home.home")
               }}</nuxt-link>
             </li>
@@ -54,7 +54,7 @@
                 @click="showMobileNavbar = false"
                 class="mobile-navbar-items"
                 :to="localePath(`/thesis?degree=${degree.id}`)"
-                >{{ degree.name }}</nuxt-link
+                >{{ degree[`name_${$i18n.locale}`] }}</nuxt-link
               >
             </li>
             <div class="settings-container-mobile">

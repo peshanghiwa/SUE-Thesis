@@ -55,7 +55,10 @@ export default async (context, locale) => {
       contactInfo: "معلومات الاتصال بالطالب",
       name: "اسم",
       email: "البريد الإلكتروني",
+      degreeType: "نوع الشهادە",
+      collage: "كلية",
       phone: "هاتف",
+      department: "القسم",
       similarResearches: "ابحاث مماثلة",
     },
   });

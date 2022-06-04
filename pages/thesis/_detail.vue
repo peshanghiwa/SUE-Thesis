@@ -27,12 +27,14 @@
         <strong> {{ $t("thesisDetail.name") }}: </strong>
         {{ thesis.student_name }}
         <br />
-        <strong> {{ $t("thesisDetail.phone") }}: </strong>
-        0750123123
+        <strong> {{ $t("thesisDetail.degreeType") }}: </strong>
+        {{ thesis.student_degree_name }}
         <br />
-
-        <strong> {{ $t("thesisDetail.email") }}: </strong>
-        ali@gmail.com
+        <strong> {{ $t("thesisDetail.collage") }}: </strong>
+        {{ thesis.collage_name }}
+        <br />
+        <strong> {{ $t("thesisDetail.department") }}: </strong>
+        {{ thesis.department_name }}
       </p>
     </div>
     <div class="side-view">
@@ -78,6 +80,7 @@ export default {
     try {
       const slug = params.detail;
       const { data } = await $axios.get(`/api/theses/${slug}`);
+      console.log(data);
       return {
         thesis: data,
       };

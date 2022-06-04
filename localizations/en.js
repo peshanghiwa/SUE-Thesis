@@ -55,8 +55,11 @@ export default async (context, locale) => {
       contactInfo: "Student Contact Info",
       name: "Name",
       email: "Email",
+      degreeType: "Degree Type",
       phone: "Phone",
+      collage: "Collage",
       similarResearches: "Similar Researches",
+      department: "Department",
     },
   });
 };

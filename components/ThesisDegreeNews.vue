@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <h2 class="title">
-      <strong> {{ $t("home.thesisDegreeNewsTitle2") }} </strong>
+      <strong> {{ $t("home.thesisDegreeNewsTitle") }} </strong>
     </h2>
     <div class="line"></div>
     <div class="newses-container">
@@ -39,7 +39,7 @@
           <nuxt-link
             :to="localePath(`/thesis/${thesis.slug}`)"
             class="full-article-button"
-            >See Full Article</nuxt-link
+            >{{ $t("home.seeFullArticle") }}</nuxt-link
           >
         </div>
       </div>
@@ -69,7 +69,6 @@ export default {
         return str;
       }
     },
-
     formatDate(time) {
       const date = new Date(time);
       const dateStr =
@@ -86,6 +85,9 @@ export default {
         ("00" + date.getSeconds()).slice(-2);
       return dateStr;
     },
+  },
+  mounted() {
+    console.log(this.latestTheses);
   },
 };
 </script>

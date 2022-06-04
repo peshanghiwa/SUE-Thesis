@@ -16,7 +16,9 @@
       <div class="input-container">
         <v-select
           :placeholder="$t('thesis.allDepartments')"
-          :options="backupDepartments || departments"
+          :options="
+            backupDepartments.length > 0 ? backupDepartments : departments
+          "
           label="name"
           :reduce="(department) => department.id"
           v-model="selectedDepartment"

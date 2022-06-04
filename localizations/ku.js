@@ -56,7 +56,10 @@ export default async (context, locale) => {
       name: "ناو",
       email: "ئیمەیڵ",
       phone: "تەلەفۆن",
+      degreeType: "جۆری بڕوانامە",
+      collage: "کۆلێژ",
       similarResearches: "توێژینەوە هاوشێوەکان",
+      department: "بەش",
     },
   });
 };

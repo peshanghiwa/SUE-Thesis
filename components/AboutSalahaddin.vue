@@ -2,7 +2,7 @@
   <div class="container">
     <div class="content-container">
       <h2>
-        <strong> {{ $t("home.thesisDegreeNewsTitle") }} </strong>
+        <strong> {{ $t("home.thesisDegreeNewsTitle2") }} </strong>
       </h2>
       <p>
         {{ $t("home.thesisDetail") }}
