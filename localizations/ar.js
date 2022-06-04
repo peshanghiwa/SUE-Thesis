@@ -6,7 +6,7 @@ export default async (context, locale) => {
         "الموقع الرسمي لأطروحات جامعة صلاح الدين ، يمكنك هنا العثور على جميع الأوراق البحثية الرسمية للبكالوريوس والدكتوراه والماجستير للطلاب المتخرجين.",
       search: "البحث",
       searchWithDots: "البحث...",
-      Home: "الرئيسية",
+      home: "الرئيسية",
       collagesTitle: "كليات جامعة صلاح الدين",
       bachelor: "بكالوريوس",
       collages: {
@@ -50,6 +50,8 @@ export default async (context, locale) => {
       pageDescription:
         "صفحة رسائل جامعة صلاح الدين ، تصفية حسب الدرجة ، القسم ، الكلية ، البحث ، والمزيد",
       noResults: "لم يتم العثور على أطروحة",
+      noMatch: "آسف ، لا توجد خيارات مطابقة.",
+      noOption: "لا توجد خيارات هنا...",
     },
     thesisDetail: {
       contactInfo: "معلومات الاتصال بالطالب",
@@ -58,6 +60,7 @@ export default async (context, locale) => {
       degreeType: "نوع الشهادە",
       collage: "كلية",
       phone: "هاتف",
+
       department: "القسم",
       similarResearches: "ابحاث مماثلة",
     },

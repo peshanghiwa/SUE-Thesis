@@ -74,7 +74,7 @@ export default {
         },
         {
           title: this.$t("home.collages.islamicScience"),
-          logo: "images/sport.svg",
+          logo: "images/islam.svg",
           id: 12,
         },
         {

@@ -50,6 +50,8 @@ export default async (context, locale) => {
       pageDescription:
         "Salahaddin University Theses page, Filter by degree, department, collage, search, and more",
       noResults: "No Thesis Found",
+      noMatch: "Sorry, no matching options.",
+      noOption: "No options here...",
     },
     thesisDetail: {
       contactInfo: "Student Contact Info",

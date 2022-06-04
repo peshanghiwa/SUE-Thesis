@@ -10,7 +10,7 @@
         :key="thesis.id"
         class="news-container"
       >
-        <small class="news-date">{{ formatDate(thesis.created_at) }}</small>
+        <small class="news-date">{{ formatDate(thesis.theises_date) }}</small>
         <div class="image-container">
           <img
             class="image"
@@ -76,13 +76,7 @@ export default {
         "/" +
         ("00" + date.getDate()).slice(-2) +
         "/" +
-        ("00" + (date.getMonth() + 1)).slice(-2) +
-        " - " +
-        ("00" + date.getHours()).slice(-2) +
-        ":" +
-        ("00" + date.getMinutes()).slice(-2) +
-        ":" +
-        ("00" + date.getSeconds()).slice(-2);
+        ("00" + (date.getMonth() + 1)).slice(-2);
       return dateStr;
     },
   },

@@ -8,13 +8,21 @@
         <v-select
           :placeholder="$t('thesis.allCollages')"
           :options="collages"
+          :dir="$store.getters.isRtl ? 'rtl' : 'ltr'"
           label="name"
           :reduce="(collage) => collage.collage_id"
           v-model="selectedCollage"
-        ></v-select>
+        >
+          <template #no-options="{ search, searching, loading }">
+            {{ $t("thesis.noOption") }}
+          </template>
+          <!-- <slot name="no-options">{{ $t("thesis.noMatch") }}</slot>
+          <slot slot="no-options">{{ $t("thesis.noOption") }}</slot> -->
+        </v-select>
       </div>
       <div class="input-container">
         <v-select
+          :dir="$store.getters.isRtl ? 'rtl' : 'ltr'"
           :placeholder="$t('thesis.allDepartments')"
           :options="
             backupDepartments.length > 0 ? backupDepartments : departments
@@ -28,6 +36,7 @@
         <v-select
           :placeholder="$t('thesis.allDegreesPlaceholder')"
           :options="degrees"
+          :dir="$store.getters.isRtl ? 'rtl' : 'ltr'"
           label="name"
           :reduce="(degree) => degree.id"
           v-model="selectedDegree"
