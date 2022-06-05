@@ -41,7 +41,7 @@
       <h2 class="similar">{{ $t("thesisDetail.similarResearches") }}</h2>
       <nuxt-link
         v-for="(relatedThesis, index) in thesis.relatedTheses"
-        :to="`/thesis/${relatedThesis.slug}`"
+        :to="localePath(`/thesis/${relatedThesis.slug}`)"
         :key="index"
         class="news-container"
       >
