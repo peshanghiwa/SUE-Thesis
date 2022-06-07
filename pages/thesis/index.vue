@@ -194,14 +194,16 @@ export default {
       };
     } catch (err) {
       console.log(err);
-      error({ statusCode: 404, message: "Page Not Found" });
+      // error({ statusCode: 404, message: "Page Not Found" });
     }
   },
   methods: {
     async clickCallback(pageNumber) {
       const currentLocale = this.$i18n.locale === "en" ? "" : this.$i18n.locale;
+      const path =
+        currentLocale === "" ? "/thesis" : `/${currentLocale}/thesis`;
       this.$router.push({
-        path: `/${currentLocale}/thesis`,
+        path,
         query: { page: Number(pageNumber) },
       });
     },
@@ -220,8 +222,10 @@ export default {
       if (this.selectedDegree) query.degree = this.selectedDegree;
       if (this.selectedSearch) query.search = this.selectedSearch;
       const currentLocale = this.$i18n.locale === "en" ? "" : this.$i18n.locale;
+      const path =
+        currentLocale === "" ? "/thesis" : `/${currentLocale}/thesis`;
       this.$router.push({
-        path: `/${currentLocale}/thesis`,
+        path,
         query,
       });
     },
