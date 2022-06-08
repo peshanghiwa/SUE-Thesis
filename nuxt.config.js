@@ -119,20 +119,61 @@ export default {
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
     manifest: {
-      name: "SUE Theses",
+      name: "example name",
+      short_name: "SUE Theses",
       lang: "en",
       description:
         "Official salahaddin university thesis website, here you can find all the official Bachelor, PhD, and Masters research papers of the graduated students.",
       theme_color: "#00adb5",
       background_color: "#FFFFFF",
+      start_url: `/`,
       icons: [
         {
-          src: "/logo.png",
+          src: "/favicon.ico",
           sizes: "192x192",
-          type: "image/png",
+          type: "image/ico",
         },
       ],
     },
+    display: "standalone",
+    dir: "auto",
+    orientation: "any",
+    icons: [
+      {
+        src: "https://su.edu.krd/sites/default/files/sue-logo-200px.png",
+        sizes: "512x512",
+        type: "image/png",
+        purpose: "maskable",
+      },
+      {
+        src: "https://su.edu.krd/sites/default/files/sue-logo-200px.png",
+        sizes: "192x192",
+        type: "image/png",
+        purpose: "any",
+      },
+    ],
+    // screenshots: [
+    //   {
+    //     src: "https://www.pwabuilder.com/assets/screenshots/screen1.png",
+    //     sizes: "2880x1800",
+    //     type: "image/png",
+    //     description: "A screenshot of the home page",
+    //   },
+    // ],
+    // related_applications: [
+    //   {
+    //     platform: "windows",
+    //     url: " The URL to your app in that app store",
+    //   },
+    // ],
+    prefer_related_applications: "false",
+    shortcuts: [
+      {
+        name: "SUE Thesis",
+        url: "/",
+        description: "Open SUE Theses",
+      },
+    ],
   },
 
   publicRuntimeConfig: {
