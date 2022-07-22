@@ -81,6 +81,12 @@ export default {
     port: 4500,
   },
 
+  buildModules: ["@nuxtjs/google-analytics"],
+
+  googleAnalytics: {
+    id: "G-5J4NXE552M",
+  },
+
   i18n: {
     locales: ["en", "ar", "ku", "ba"],
     locales: [
