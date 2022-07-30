@@ -16,8 +16,6 @@
           <template #no-options="{ search, searching, loading }">
             {{ $t("thesis.noOption") }}
           </template>
-          <!-- <slot name="no-options">{{ $t("thesis.noMatch") }}</slot>
-          <slot slot="no-options">{{ $t("thesis.noOption") }}</slot> -->
         </v-select>
       </div>
       <div class="input-container">
@@ -42,21 +40,32 @@
           v-model="selectedDegree"
         ></v-select>
       </div>
-      <div class="input3">
+
+      <div class="input-container">
+        <v-select
+          :placeholder="$t('thesis.allSupervisors')"
+          :options="supervisors"
+          :dir="$store.getters.isRtl ? 'rtl' : 'ltr'"
+          label="name"
+          :reduce="(supervisor) => supervisor.id"
+          v-model="selectedSupervisor"
+        >
+          <template #no-options="{ search, searching, loading }">
+            {{ $t("thesis.noOption") }}
+          </template>
+        </v-select>
+      </div>
+      <div class="input-container">
         <input
           :placeholder="$t('thesis.searchPlaceholder')"
           v-model="selectedSearch"
           class="search-input"
           type="text"
         />
+      </div>
+      <div class="input-container">
         <button class="search-button" @click="onSearchHandle">
-          <img
-            src="/images/search-png.png"
-            class="search-icon"
-            height="20"
-            width="20"
-            alt=""
-          />
+          Apply Filter
         </button>
       </div>
     </div>
@@ -108,7 +117,7 @@
       <paginate
         v-model="pagination.currentPage"
         :page-count="pagination.totalPages"
-        :page-range="2"
+        :page-range="3"
         :margin-pages="2"
         :click-handler="clickCallback"
         :prev-text="
@@ -133,19 +142,35 @@
 </template>
 <script>
 export default {
-  watchQuery: ["page", "search", "collage", "department", "degree"],
-  async asyncData({ query, error, $axios, $t }) {
+  watchQuery: [
+    "page",
+    "search",
+    "collage",
+    "department",
+    "degree",
+    "supervisor",
+  ],
+  async asyncData({ query, $axios }) {
     try {
-      const { page = 1, degree, search, department, collage } = query;
+      const {
+        page = 1,
+        degree,
+        search,
+        department,
+        collage,
+        supervisor,
+      } = query;
       let url = `/api/theses/grid?page=${page - 1}&pageSize=20`;
       if (degree) url += `&degree=${degree}`;
       if (search) url += `&search=${search}`;
       if (department) url += `&department=${department}`;
       if (collage) url += `&collage=${collage}`;
+      if (supervisor) url += `&supervisorId=${supervisor}`;
 
       const { data } = await $axios.get(url);
 
       const response = await $axios.get("/api/home/thesesPage");
+
       const degrees = response.data.degrees.map((degree) => ({
         id: degree.id,
         name: degree.name,
@@ -171,10 +196,19 @@ export default {
             .departments?.find((item) => item.id === Number(department))
             ?.department_name ?? "";
       }
+
+      const supervisors = response.data.supervisors;
+      let selectedSupervisor = "";
+      if (supervisor) {
+        selectedSupervisor = supervisors.find(
+          (item) => item.id === Number(supervisor)
+        );
+      }
       return {
         theses: data.data,
         degrees,
         collages,
+        supervisors,
         pagination: {
           currentPage: Number(page),
           totalPages: data.pages,
@@ -191,6 +225,7 @@ export default {
         backupDepartments,
         selectedDepartment,
         selectedSearch: search,
+        selectedSupervisor,
       };
     } catch (err) {
       console.log(err);
@@ -221,6 +256,7 @@ export default {
       if (this.selectedDepartment) query.department = this.selectedDepartment;
       if (this.selectedDegree) query.degree = this.selectedDegree;
       if (this.selectedSearch) query.search = this.selectedSearch;
+      if (this.selectedSupervisor) query.supervisor = this.selectedSupervisor;
       const currentLocale = this.$i18n.locale === "en" ? "" : this.$i18n.locale;
       const path =
         currentLocale === "" ? "/thesis" : `/${currentLocale}/thesis`;
@@ -228,6 +264,11 @@ export default {
         path,
         query,
       });
+    },
+  },
+  watch: {
+    selectedCollage() {
+      this.selectedDepartment = "";
     },
   },
   computed: {
@@ -324,8 +365,8 @@ export default {
 }
 .inputs-container {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  column-gap: 20px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
 }
 @media screen and (max-width: 1000px) {
   .inputs-container {
@@ -341,15 +382,17 @@ export default {
 }
 .input-container {
   background-color: white;
+  height: 34px;
 }
 .input3 {
   border-radius: 4px;
+  height: 33px;
   display: flex;
   column-gap: 10px;
 }
 .search-input {
-  width: calc(100% - 70px);
-  height: 97%;
+  width: 95%;
+  height: 31px;
   border: none;
   border-radius: 4px;
   border: 1px solid rgba(0, 0, 0, 0.207);
@@ -369,11 +412,13 @@ export default {
   font-size: 15px;
 }
 .search-button {
-  width: 40px;
-  margin-inline-start: 10px !important;
-  height: 20px;
+  width: 100%;
+  height: 34px;
   border: none;
   border-radius: 4px;
+  font-size: 15px;
+  background-color: #00adb5;
+  color: white;
   cursor: pointer;
 }
 .search-icon {
