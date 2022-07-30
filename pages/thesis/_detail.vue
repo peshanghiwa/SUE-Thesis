@@ -8,7 +8,6 @@
       <div class="date">
         {{ thesis.student_name }} - {{ formatDate(thesis.theises_date) }}
       </div>
-      <div class="supervisors">{{ supervisorsName }}</div>
       <img
         :src="
           `https://backend.ethesis.su.edu.krd/${thesis.image_url}` ||
