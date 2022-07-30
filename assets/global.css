@@ -65,6 +65,19 @@ a {
   width: 100%;
   font-size: 16px;
 }
+
+@media screen and (max-width: 768px) {
+  .pagination {
+    column-gap: 10px;
+  }
+  .page-item {
+    min-height: 22px;
+    min-width: 22px;
+  }
+  .page-item a {
+    font-size: 11px;
+  }
+}
 .hover-effet,
 .hover-effet2,
 .hover-effet3 {
