@@ -45,6 +45,7 @@ export default async (context, locale) => {
       allDegreesPlaceholder: "هەموو پلەکان",
       allDepartments: "سەرجەم بەشەکان",
       allCollages: "سەرجەم کۆلێژەکان",
+      allSupervisors: "سەرجەم سەرپەرشتیارەکان",
       pageTitle: "توێژینەوەکان",
       pageName: "ماڵپەڕی تێزەکانی زانکۆی سەڵاحەدین",
       pageDescription:
@@ -54,13 +55,15 @@ export default async (context, locale) => {
       noOption: "هیچ بژاردەیەک نییە...",
     },
     thesisDetail: {
-      contactInfo: "زانیاری پەیوەندی خوێندکار",
+      contactInfo: "زانیاری توێژەوە",
       name: "ناو",
       email: "ئیمەیڵ",
       phone: "تەلەفۆن",
       degreeType: "جۆری بڕوانامە",
       collage: "کۆلێژ",
       similarResearches: "توێژینەوە هاوشێوەکان",
+      supervisors: "سەرپەرشتیارەکان",
+      supervisor: "سەرپەرشتیار",
       department: "بەش",
     },
   });

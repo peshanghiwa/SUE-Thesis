@@ -45,6 +45,7 @@ export default async (context, locale) => {
       allDegreesPlaceholder: "All Degrees",
       allDepartments: "All Departments",
       allCollages: "All Collages",
+      allSupervisors: "All Supervisors",
       pageTitle: "Theses",
       pageName: "Salahaddin University Theses Website",
       pageDescription:
@@ -54,13 +55,15 @@ export default async (context, locale) => {
       noOption: "No options here...",
     },
     thesisDetail: {
-      contactInfo: "Student Contact Info",
+      contactInfo: "Thesis Info",
       name: "Name",
       email: "Email",
       degreeType: "Degree Type",
       phone: "Phone",
       collage: "Collage",
       similarResearches: "Similar Researches",
+      supervisors: "Supervisors",
+      supervisor: "Supervisor",
       department: "Department",
     },
   });
