@@ -8,6 +8,7 @@
       <div class="date">
         {{ thesis.student_name }} - {{ formatDate(thesis.theises_date) }}
       </div>
+      <div class="supervisors">{{ supervisorsName }}</div>
       <img
         :src="
           `https://backend.ethesis.su.edu.krd/${thesis.image_url}` ||
@@ -35,6 +36,8 @@
         <br />
         <strong> {{ $t("thesisDetail.department") }}: </strong>
         {{ thesis.department_name }}
+        <br>
+         <div class="supervisors">{{ supervisorsName }}</div>
       </p>
     </div>
     <div class="side-view">
@@ -80,14 +83,33 @@ export default {
     try {
       const slug = params.detail;
       const { data } = await $axios.get(`/api/theses/${slug}`);
-      console.log(data);
+      console.log(data.supervisors);
       return {
         thesis: data,
+        supervisors: data.supervisors,
       };
     } catch (err) {
       console.log(err);
       error({ statusCode: 404, message: "Page Not Found" });
     }
+  },
+  computed: {
+    supervisorsName() {
+      if (this.supervisors.length > 0) {
+        const supervisorsNames = this.supervisors
+          .map((supervisor) => {
+            return `${supervisor.name}`;
+          })
+          .join(", ");
+
+        if (this.supervisors.length > 1) {
+          return `${this.$t("thesisDetail.supervisors")}: ${supervisorsNames}`;
+        } else if (this.supervisors.length == 1) {
+          return `${this.$t("thesisDetail.supervisor")}: ${supervisorsNames}`;
+        }
+      }
+      return "";
+    },
   },
   methods: {
     trancate(str) {
