@@ -183,10 +183,9 @@ export default {
   },
 
   publicRuntimeConfig: {
-    baseUrl: "https://ethesis.su.edu.krd",
+    baseUrl: "https://backend.ethesis.su.edu.krd",
     logoUrl: "https://su.edu.krd/sites/default/files/sue-logo-200px.png",
   },
 
-  // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
 };
